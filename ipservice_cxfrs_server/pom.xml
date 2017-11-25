@@ -1,0 +1,103 @@
+<?xml version="1.0"?>
+<project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd" xmlns="http://maven.apache.org/POM/4.0.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>org.jeannyil.fuse</groupId>
+    		<artifactId>cxfrs-demo</artifactId>
+    		<version>1.0.0-SNAPSHOT</version>
+  	</parent>
+	
+	<artifactId>ipservice_cxfrs_server</artifactId>
+	<packaging>bundle</packaging>
+	<name>Demo :: IP-Service CXFRS Server</name>
+	<description>A Fuse Camel CXFRS Server exposing a CXFRS Client for the FreeGeoIp service</description>
+
+	<licenses>
+		<license>
+			<name>Apache License, Version 2.0</name>
+			<distribution>repo</distribution>
+			<url>http://www.apache.org/licenses/LICENSE-2.0.html</url>
+		</license>
+	</licenses>
+
+	<properties>
+		<!-- Fabric8 profile configuration -->
+		<fabric8.abstractProfile>false</fabric8.abstractProfile>
+		<fabric8.features>camel-amq camel-jackson</fabric8.features>
+		<fabric8.parentProfiles>org-jeannyil-fuse-cxfrs-demo</fabric8.parentProfiles>
+		<fabric8.profile>org-jeannyil-fuse-cxfrs-demo-ipservice_cxfrs_server</fabric8.profile>
+	</properties>
+	
+	<!--  Dependencies -->
+	<dependencies>
+		<!-- Used for camel cxfrs server endpoint -->
+		<dependency>
+			<groupId>org.apache.cxf</groupId>
+			<artifactId>cxf-rt-transports-http-jetty</artifactId>
+	    </dependency>
+		<!-- Used for camel-jackson component -->
+		<dependency>
+			<groupId>org.apache.camel</groupId>
+			<artifactId>camel-jackson</artifactId>
+		</dependency>
+		<!--  Used for swagger -->
+		<dependency>
+			<groupId>org.apache.servicemix.bundles</groupId>
+			<artifactId>org.apache.servicemix.bundles.swagger-jaxrs</artifactId>
+			<optional>true</optional>
+			<exclusions>
+				<exclusion>
+					<groupId>javassist</groupId>
+					<artifactId>javassist</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.cxf</groupId>
+			<artifactId>cxf-rt-frontend-jaxrs</artifactId>
+		</dependency>
+		<!--  For use with io.fabric8.cxf.endpoint.SwaggerFeature if
+	      	  org.apache.cxf.jaxrs.swagger.SwaggerFeature is not used  -->
+		<dependency>
+			<groupId>io.fabric8</groupId>
+			<artifactId>fabric-cxf-plugins</artifactId>
+			<version>${maven-fabric8-plugin.version}</version>
+		</dependency>
+		<!--  For use with org.apache.cxf.jaxrs.swagger.SwaggerFeature if
+			  io.fabric8.cxf.endpoint.SwaggerFeature is not used -->
+		<dependency>
+			<groupId>org.apache.cxf</groupId>
+			<artifactId>cxf-rt-rs-service-description-swagger</artifactId>
+			<version>3.1.7</version>
+		</dependency>
+	</dependencies>
+	
+	<!-- Configuration of the maven fabric-cxf-plugins for swagger -->
+	<build>
+		<plugins>
+			<!-- maven fabric-cxf-plugins -->
+			<plugin>
+	        <groupId>io.fabric8</groupId>
+	        <artifactId>fabric-cxf-plugins</artifactId>
+	        <version>${maven-fabric8-plugin.version}</version>
+	        <executions>
+				<execution>
+					<id>process-classes</id>
+					<phase>process-classes</phase>
+					<goals>
+						<goal>java2swagger</goal>
+					</goals>
+					<configuration>
+					<classResourceNames>
+						<classResourceName>org.jeannyil.fuse.demo.ipservice.server.resource.IpService</classResourceName>
+	              </classResourceNames>
+	              <attachSwagger>false</attachSwagger>
+	            </configuration>
+	          </execution>
+	        </executions>
+	      </plugin>
+	    </plugins>
+  </build>
+</project>

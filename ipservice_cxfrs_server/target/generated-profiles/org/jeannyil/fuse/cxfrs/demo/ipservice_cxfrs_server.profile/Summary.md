@@ -1,0 +1,1 @@
+A Fuse Camel CXFRS Server exposing a CXFRS Client for the FreeGeoIp service
