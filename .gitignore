@@ -26,4 +26,6 @@ hs_err_pid*
 /.classpath
 /.project
 /.settings
+/.DS_Store
+/.pom.xml.swp
 /bin/
