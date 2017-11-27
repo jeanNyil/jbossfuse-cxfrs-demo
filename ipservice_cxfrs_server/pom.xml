@@ -11,8 +11,8 @@
 	
 	<artifactId>ipservice_cxfrs_server</artifactId>
 	<packaging>bundle</packaging>
-	<name>Demo :: IP-Service CXFRS Server</name>
-	<description>A Fuse Camel CXFRS Server exposing a CXFRS Client for the FreeGeoIp service</description>
+	<name>Camel CXFRS Demo :: IP-Service RESTful Server</name>
+	<description>A Red Hat JBoss Fuse 6.3.0 RESTful service that handles operations on an IP address or a hostname</description>
 
 	<licenses>
 		<license>
@@ -25,7 +25,7 @@
 	<properties>
 		<!-- Fabric8 profile configuration -->
 		<fabric8.abstractProfile>false</fabric8.abstractProfile>
-		<fabric8.features>camel-amq camel-jackson</fabric8.features>
+		<fabric8.features>camel-jackson</fabric8.features>
 		<fabric8.parentProfiles>org-jeannyil-fuse-cxfrs-demo</fabric8.parentProfiles>
 		<fabric8.profile>org-jeannyil-fuse-cxfrs-demo-ipservice_cxfrs_server</fabric8.profile>
 	</properties>
@@ -58,19 +58,16 @@
 			<groupId>org.apache.cxf</groupId>
 			<artifactId>cxf-rt-frontend-jaxrs</artifactId>
 		</dependency>
-		<!--  For use with io.fabric8.cxf.endpoint.SwaggerFeature if
-	      	  org.apache.cxf.jaxrs.swagger.SwaggerFeature is not used  -->
+		<!--  For use with io.fabric8.cxf.endpoint.SwaggerFeature bean --> 
 		<dependency>
 			<groupId>io.fabric8</groupId>
 			<artifactId>fabric-cxf-plugins</artifactId>
-			<version>${maven-fabric8-plugin.version}</version>
+			<version>${maven-fabric8-plugin.version}</version> 
 		</dependency>
-		<!--  For use with org.apache.cxf.jaxrs.swagger.SwaggerFeature if
-			  io.fabric8.cxf.endpoint.SwaggerFeature is not used -->
 		<dependency>
 			<groupId>org.apache.cxf</groupId>
 			<artifactId>cxf-rt-rs-service-description-swagger</artifactId>
-			<version>3.1.7</version>
+			<version>${cxf.version}</version>
 		</dependency>
 	</dependencies>
 	

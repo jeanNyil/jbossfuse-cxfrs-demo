@@ -30,6 +30,7 @@
 		<jboss.fuse.bom.version>6.3.0.redhat-310</jboss.fuse.bom.version>
 		<maven-fabric8-plugin.version>1.2.0.redhat-630310</maven-fabric8-plugin.version>
 		<camel.version>2.17.0.redhat-630310</camel.version>
+		<cxf.version>3.1.5.redhat-630310</cxf.version>
 		<java.version>1.8</java.version>
 		<!-- fabric8 properties -->
 	    <fabric8.parentProfiles>default feature-camel feature-camel-jms feature-cxf</fabric8.parentProfiles>
@@ -39,7 +40,7 @@
 		<fabric8.upload>true</fabric8.upload>
 		<fabric8.profile>org-jeannyil-fuse-cxfrs-demo</fabric8.profile>
 		<fabric8.abstractProfile>true</fabric8.abstractProfile>	
-		<fabric8.features>camel-cxf cxf-commands swagger</fabric8.features> 	
+		<fabric8.features>camel-amq camel-cxf cxf-commands swagger</fabric8.features> 	
   	</properties>
   	
   	<!--  JBoss Fuse BOM -->
@@ -221,6 +222,7 @@
 	<!-- Modules -->
 	<modules>
 		<module>ipservice_cxfrs_server</module>
+		<module>ipservice_cxfrs_client</module>
 	</modules>
 
 	<!-- Configuration of maven artifacts distribution to private NEXUS OSS repository -->
