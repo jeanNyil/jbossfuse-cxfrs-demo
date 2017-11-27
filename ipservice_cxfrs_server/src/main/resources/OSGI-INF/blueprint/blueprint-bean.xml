@@ -30,7 +30,7 @@
     <cm:property-placeholder id="ipservice_cxfrsserver-props"
         persistent-id="org.jeannyil.fuse.demo.ipservicecxfrsserver"
         placeholder-prefix="$app{" placeholder-suffix="}" update-strategy="reload">
-        <cm:default-properties>
+	<cm:default-properties>
             <cm:property name="context.name.application" value="demo-ipservice_cxfrs_server"/>
             <cm:property name="camel.name.route" value="demo-ipservicecxfrsserver-route"/>
             <cm:property name="notif.amq.destination" value="IPSERVICE.CXFRSSERVER.NOTIF.QUEUETIF.QUEUE"/>
