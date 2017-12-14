@@ -59,11 +59,6 @@
         <property name="userName" value="$app{broker.user.name}"/>
         <property name="password" value="$app{broker.user.password}"/>
     </bean>
-    <!-- bean class="org.apache.activemq.ActiveMQConnectionFactory" id="amqConnectionFactory">
-        <property name="brokerURL" value="$app{broker.out.url}"/>
-        <property name="userName" value="$app{broker.user.name}"/>
-        <property name="password" value="$app{broker.user.password}"/>
-    </bean-->
     <bean class="org.apache.activemq.pool.PooledConnectionFactory"
         destroy-method="stop" id="pooledConnectionFactory" init-method="start">
         <property name="maxConnections" value="$app{broker.max.connections}"/>

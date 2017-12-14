@@ -62,7 +62,7 @@
 		<dependency>
 			<groupId>io.fabric8</groupId>
 			<artifactId>fabric-cxf-plugins</artifactId>
-			<version>${maven-fabric8-plugin.version}</version> 
+			<version>${fabric8.version}</version> 
 		</dependency>
 		<dependency>
 			<groupId>org.apache.cxf</groupId>
@@ -75,25 +75,49 @@
 		<plugins>
 			<!-- maven fabric-cxf-plugins -->
 			<plugin>
-	        <groupId>io.fabric8</groupId>
-	        <artifactId>fabric-cxf-plugins</artifactId>
-	        <version>${maven-fabric8-plugin.version}</version>
-	        <executions>
-				<execution>
-					<id>process-classes</id>
-					<phase>process-classes</phase>
-					<goals>
-						<goal>java2swagger</goal>
-					</goals>
-					<configuration>
-					<classResourceNames>
-						<classResourceName>org.jeannyil.fuse.demo.ipservice.server.resource.IpService</classResourceName>
-	              </classResourceNames>
-	              <attachSwagger>false</attachSwagger>
-	            </configuration>
-	          </execution>
-	        </executions>
-	      </plugin>
+		        <groupId>io.fabric8</groupId>
+		        <artifactId>fabric-cxf-plugins</artifactId>
+		        <version>${fabric8.version}</version>
+		        <executions>
+					<execution>
+						<id>process-classes</id>
+						<phase>process-classes</phase>
+						<goals>
+							<goal>java2swagger</goal>
+						</goals>
+						<configuration>
+						<classResourceNames>
+							<classResourceName>org.jeannyil.fuse.demo.ipservice.server.resource.IpService</classResourceName>
+		              </classResourceNames>
+		              <attachSwagger>false</attachSwagger>
+		            </configuration>
+		          </execution>
+		        </executions>
+	      	</plugin>
+	      	<!-- Used for installing the features repository in MAVEN repo -->
+	      	<plugin>
+		        <groupId>org.codehaus.mojo</groupId>
+		        <artifactId>build-helper-maven-plugin</artifactId>
+		        <version>${build-helper-maven-plugin-version}</version>
+		        <executions>
+		          <execution>
+		            <id>attach-artifacts</id>
+		            <phase>package</phase>
+		            <goals>
+		              <goal>attach-artifact</goal>
+		            </goals>
+		            <configuration>
+		              <artifacts>
+		                <artifact>
+		                  <file>target/classes/features.xml</file>
+		                  <type>xml</type>
+		                  <classifier>features</classifier>
+		                </artifact>
+		              </artifacts>
+		            </configuration>
+		          </execution>
+		        </executions>
+      		</plugin>
 	    </plugins>
   </build>
 </project>
