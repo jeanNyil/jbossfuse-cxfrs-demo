@@ -25,11 +25,18 @@
 <blueprint xmlns="http://www.osgi.org/xmlns/blueprint/v1.0.0"
     xmlns:cm="http://aries.apache.org/blueprint/xmlns/blueprint-cm/v1.1.0"
     xmlns:cxf="http://camel.apache.org/schema/blueprint/cxf"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.osgi.org/xmlns/blueprint/v1.0.0 https://www.osgi.org/xmlns/blueprint/v1.0.0/blueprint.xsd http://camel.apache.org/schema/blueprint http://camel.apache.org/schema/blueprint/camel-blueprint.xsd">
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="
+           http://www.osgi.org/xmlns/blueprint/v1.0.0
+           https://www.osgi.org/xmlns/blueprint/v1.0.0/blueprint.xsd
+           http://camel.apache.org/schema/blueprint
+           http://camel.apache.org/schema/blueprint/camel-blueprint.xsd
+           http://aries.apache.org/blueprint/xmlns/blueprint-cm/v1.1.0
+           http://aries.apache.org/schemas/blueprint-cm/blueprint-cm-1.1.0.xsd">
     <!-- PID -->
     <cm:property-placeholder id="ipservice_cxfrsserver-props"
         persistent-id="org.jeannyil.fuse.demo.ipservicecxfrsserver"
-        placeholder-prefix="$app{" placeholder-suffix="}" update-strategy="reload">
+        placeholder-prefix="${" placeholder-suffix="}" update-strategy="reload">
 	<cm:default-properties>
             <cm:property name="context.name.application" value="demo-ipservice_cxfrs_server"/>
             <cm:property name="camel.name.route" value="demo-ipservicecxfrsserver-route"/>
@@ -45,24 +52,27 @@
             <cm:property name="broker.max.activesessionperconnection" value="500"/>
             <cm:property name="output.message.ttl.inms" value="300000"/>
             <cm:property name="exposed.service.port" value="9095"/>
-	    <cm:property name="exposed.service.gateway.host" value="fuse-poc.lab.com"/>
-	    <cm:property name="exposed.service.gateway.port" value="9090"/>
+            <cm:property name="exposed.service.gateway.host" value="fuse-poc.lab.com"/>
+            <cm:property name="exposed.service.gateway.port" value="9090"/>
+            <cm:property name="restful.service.ssl.key.password" value="P@ssw0rd"/>
+            <cm:property name="restful.service.ssl.keystore.password" value="P@ssw0rd"/>
+            <cm:property name="restful.service.ssl.keystore" value="/home/jEAN/mnt/nfsshare/security/fuse-standalone.lab.com/jboss-amq/ssl-broker-keystore.jks"/>
         </cm:default-properties>
     </cm:property-placeholder>
     <!--  ActiveMQ component with an SSL-secured pooledConnection factory -->
     <bean class="org.apache.activemq.ActiveMQSslConnectionFactory" id="amqSslConnectionFactory">
-    		<property name="trustStore" value="$app{amqclient.ssl.truststore}"/>
-        <property name="trustStorePassword" value="$app{amqclient.ssl.truststore.password}"/>
-        <!--  <property name="keyStore" value="$app{amqclient.ssl.keystore}"/>
-        <property name="keyStorePassword" value="$app{amqclient.ssl.keystore.password}"/> -->
-        <property name="brokerURL" value="$app{broker.out.url}"/>
-        <property name="userName" value="$app{broker.user.name}"/>
-        <property name="password" value="$app{broker.user.password}"/>
+    		<property name="trustStore" value="${amqclient.ssl.truststore}"/>
+        <property name="trustStorePassword" value="${amqclient.ssl.truststore.password}"/>
+        <!--  <property name="keyStore" value="${amqclient.ssl.keystore}"/>
+        <property name="keyStorePassword" value="${amqclient.ssl.keystore.password}"/> -->
+        <property name="brokerURL" value="${broker.out.url}"/>
+        <property name="userName" value="${broker.user.name}"/>
+        <property name="password" value="${broker.user.password}"/>
     </bean>
     <bean class="org.apache.activemq.pool.PooledConnectionFactory"
         destroy-method="stop" id="pooledConnectionFactory" init-method="start">
-        <property name="maxConnections" value="$app{broker.max.connections}"/>
-        <property name="maximumActiveSessionPerConnection" value="$app{broker.max.activesessionperconnection}"/>
+        <property name="maxConnections" value="${broker.max.connections}"/>
+        <property name="maximumActiveSessionPerConnection" value="${broker.max.activesessionperconnection}"/>
         <property name="connectionFactory" ref="amqSslConnectionFactory"/>
     </bean>
     <bean class="org.apache.camel.component.jms.JmsConfiguration" id="jmsConfig">
@@ -86,7 +96,7 @@
 
     <!-- Camel context -->
     <camelContext allowUseOriginalMessage="false"
-        id="ipservice-cxfrsserver-context-001" xmlns="http://camel.apache.org/schema/blueprint">
+        id="ipservice-cxfrsserver-context" xmlns="http://camel.apache.org/schema/blueprint">
         <routeBuilder ref="ipServiceCxfRsServerRoute"/>
     </camelContext>
 
@@ -94,35 +104,34 @@
     <cxf:rsClient id="freeGeoIpRsClient" address="http://freegeoip.net/"
          serviceClass="org.jeannyil.fuse.demo.ipservice.server.endpoint.FreeGeoIp"
          loggingFeatureEnabled="true">
-    		<cxf:providers>
-    			<bean id="jsonProvider" class="com.fasterxml.jackson.jaxrs.json.JacksonJsonProvider"/>
-    		</cxf:providers>
+        <cxf:providers>
+            <bean id="clientJsonProvider" class="com.fasterxml.jackson.jaxrs.json.JacksonJsonProvider"/>
+        </cxf:providers>
     </cxf:rsClient>
-    <cxf:rsServer id="ipRsService" address="http://0.0.0.0:$app{exposed.service.port}/cxf/rest"
+    <cxf:rsServer id="ipRsService" address="/rest"
     		 serviceClass="org.jeannyil.fuse.demo.ipservice.server.resource.IpService"
     		 loggingFeatureEnabled="true">
-    		<cxf:providers>
-    			<bean id="jsonProvider" class="com.fasterxml.jackson.jaxrs.json.JacksonJsonProvider"/>
-    		</cxf:providers>
-    		<!-- Enable Swagger -->
-    		<cxf:features>
-  			<!-- <bean class="io.fabric8.cxf.endpoint.SwaggerFeature"> -->
-  			<bean class="org.apache.cxf.jaxrs.swagger.Swagger2Feature">
-    				<property name="runAsFilter" value="true" />
-				<property name="host" value="$app{exposed.service.gateway.host}:$app{exposed.service.gateway.port}"/>
-				<property name="basePath" value="/cxf/rest"/>
-    				<property name="title" value="RESTful IP/Hostname Service DEMO"/>
-    				<property name="description" value="Camel CXFRS Demo :: A Red Hat JBoss Fuse 6.3.0 RESTful service that handles operations on an IP address or a hostname"/>
-    				<property name="version" value="${project.version}"/>
-    				<property name="contact" value="jean.nyilimbibi@redhat.com"/>
-				<property name="prettyPrint" value="true"/>
-				<property name="schemes">
-					<array value-type="java.lang.String">
-            					<value>http</value>
-            					<value>https</value>
-        				</array>
-				</property>
-  			</bean>
-		</cxf:features> 
+        <cxf:providers>
+            <bean id="serverJsonProvider" class="com.fasterxml.jackson.jaxrs.json.JacksonJsonProvider"/>
+        </cxf:providers>
+        <!-- Enable Swagger -->
+        <cxf:features>
+            <bean class="org.apache.cxf.jaxrs.swagger.Swagger2Feature">
+                <property name="runAsFilter" value="true" />
+                <property name="host" value="${exposed.service.gateway.host}:${exposed.service.gateway.port}"/>
+                <property name="basePath" value="/cxf/rest"/>
+                <property name="title" value="RESTful IP/Hostname Service DEMO"/>
+                <property name="description" value="Camel CXFRS Demo :: A Red Hat JBoss Fuse 6.3.0 RESTful service that handles operations on an IP address or a hostname"/>
+                <property name="version" value="${project.version}"/>
+                <property name="contact" value="jean.nyilimbibi@redhat.com"/>
+                <property name="prettyPrint" value="true"/>
+                <property name="schemes">
+                    <array value-type="java.lang.String">
+                        <value>http</value>
+                        <value>https</value>
+                    </array>
+                </property>
+            </bean>
+		</cxf:features>
 	</cxf:rsServer>
 </blueprint>

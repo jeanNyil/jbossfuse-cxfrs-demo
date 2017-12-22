@@ -9,10 +9,8 @@
   <feature name="ipservice_cxfrs_server" version="${project.version}" resolver="(obr)">
       <feature version="${fabric8.version}">fabric-cxf</feature>
       <feature version="${fabric8.version}">fabric-cxf-registry</feature>
-      <feature version="${fabric8.version}">swagger</feature>
       <feature version="${fabric8.version}">activemq-camel</feature>
       <feature version="${camel.version}">camel-jackson</feature>
-      <feature version="${cxf.version}">cxf-jaxrs</feature>
       <bundle>mvn:org.jeannyil.fuse/ipservice_cxfrs_server/${project.version}</bundle>
   </feature>
 
