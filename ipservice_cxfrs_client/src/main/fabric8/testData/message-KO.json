@@ -1,0 +1,8 @@
+{
+  "parameters": [
+    {
+      "ip_or_hostname": 1.0,
+      "response_type": "xml"
+    }
+  ]
+}

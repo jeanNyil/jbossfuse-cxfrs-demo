@@ -1,0 +1,16 @@
+{
+  "parameters": [
+    {
+      "ip_or_hostname": "",
+      "response_type": "xml"
+    },
+    {
+      "ip_or_hostname": "redhat.com",
+      "response_type": "json"
+    },
+    {
+      "ip_or_hostname": "org.example",
+      "response_type": "csv"
+    }
+  ]
+}

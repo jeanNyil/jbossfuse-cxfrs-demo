@@ -1,0 +1,39 @@
+{
+  "definitions": {},
+  "$schema": "http://json-schema.org/draft-06/schema#",
+  "$id": "http://json-schema.org/draft-06/schema#",
+  "type": "object",
+  "properties": {
+    "parameters": {
+      "$id": "/properties/parameters",
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "$id": "/properties/parameters/items",
+        "type": "object",
+        "properties": {
+          "ip_or_hostname": {
+            "$id": "/properties/parameters/items/properties/ip_or_hostname",
+            "type": "string",
+            "title": "The Ip_or_hostname Schema.",
+            "description": "The IP address or hostname to look for",
+            "default": "",
+            "examples": [
+              ""
+            ]
+          },
+          "response_type": {
+            "$id": "/properties/parameters/items/properties/response_type",
+            "type": "string",
+            "title": "The Response_type Schema.",
+            "description": "The expected response format type - xml or json",
+            "default": "",
+            "examples": [
+              "xml"
+            ]
+          }
+        }
+      }
+    }
+  }
+}

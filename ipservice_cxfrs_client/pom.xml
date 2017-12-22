@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd" xmlns="http://maven.apache.org/POM/4.0.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>org.jeannyil.fuse</groupId>
+    		<artifactId>cxfrs-demo</artifactId>
+    		<version>1.0.0-SNAPSHOT</version>
+  	</parent>
+
+	<artifactId>ipservice_cxfrs_client</artifactId>
+	<packaging>bundle</packaging>
+	<name>Camel CXFRS Demo :: IP-Service RESTful Client</name>
+	<description>A Red Hat JBoss Fuse 6.3.0 RESTful client for the IPSERVICE CXFRS Server exposed behind an SSL-enabled fabric8 gateway</description>
+
+    <licenses>
+        <license>
+            <name>Apache License, Version 2.0</name>
+            <distribution>repo</distribution>
+            <url>http://www.apache.org/licenses/LICENSE-2.0.html</url>
+        </license>
+    </licenses>
+
+    <properties>
+		<!-- Fabric8 profile configuration -->
+    		<fabric8.abstractProfile>false</fabric8.abstractProfile>
+    		<fabric8.featureRepos>mvn:org.jeannyil.fuse/ipservice_cxfrs_client/${project.version}/xml/features</fabric8.featureRepos>
+		<fabric8.features>everit-jsonschema-validator</fabric8.features>
+    		<fabric8.parentProfiles>org-jeannyil-fuse-cxfrs-demo</fabric8.parentProfiles>
+    		<fabric8.profile>org-jeannyil-fuse-cxfrs-demo-ipservice_cxfrs_client</fabric8.profile>
+	</properties>
+	
+	<!-- Dependencies -->
+	<dependencies>
+		<!-- Used for the Everit JSON validator (FGE) library (https://github.com/everit-org/json-schema) -->
+		<dependency>
+			<groupId>org.everit.json</groupId>
+			<artifactId>org.everit.json.schema</artifactId>
+			<version>1.5.1</version>
+		</dependency>
+   		<dependency>
+			<groupId>org.json</groupId>
+			<artifactId>json</artifactId>
+			<version>20160810</version>
+		</dependency>
+        <!-- Used for JacksonJsonProvider -->
+        <dependency>
+            <groupId>com.fasterxml.jackson.jaxrs</groupId>
+            <artifactId>jackson-jaxrs-json-provider</artifactId>
+        </dependency>
+		<!-- Used for camel cxfrs client endpoint
+        <dependency>
+            <groupId>org.apache.cxf</groupId>
+            <artifactId>cxf-rt-transports-http</artifactId>
+        </dependency>
+        <dependency>
+			<groupId>org.apache.cxf</groupId>
+			<artifactId>cxf-rt-security</artifactId>
+		</dependency>
+        <dependency>
+            <groupId>org.apache.cxf</groupId>
+            <artifactId>cxf-rt-frontend-jaxrs</artifactId>
+        </dependency> -->
+	</dependencies>
+	
+	<!-- Configuration of the build-helper-maven-plugin  -->
+	<build>
+		<plugins>
+			<!-- Attach the generated features file as an artifact,
+	             and publish to the maven repository -->
+			<plugin>
+		        <groupId>org.codehaus.mojo</groupId>
+		        <artifactId>build-helper-maven-plugin</artifactId>
+		        <version>1.5</version>
+		        <executions>
+					<execution>
+						<id>attach-artifacts</id>
+						<phase>package</phase>
+						<goals>
+							<goal>attach-artifact</goal>
+						</goals>
+						<configuration>
+							<artifacts>
+								<artifact>
+									<file>target/classes/features.xml</file>
+									<type>xml</type>
+									<classifier>features</classifier>
+				                </artifact>
+							</artifacts>
+						</configuration>
+					</execution>
+		        </executions>
+			</plugin>
+		</plugins>
+	</build>
+</project>

@@ -41,7 +41,7 @@
 		<fabric8.upload>true</fabric8.upload>
 		<fabric8.profile>org-jeannyil-fuse-cxfrs-demo</fabric8.profile>
 		<fabric8.abstractProfile>true</fabric8.abstractProfile>	
-		<fabric8.features>camel-amq camel-cxf cxf-commands swagger</fabric8.features> 	
+		<fabric8.features>camel-amq camel-cxf cxf-commands camel-jackson</fabric8.features>
   	</properties>
   	
   	<!--  JBoss Fuse BOM -->
@@ -70,7 +70,7 @@
   	<dependencies>
   		<!-- Used for camel blueprint and components -->
 		<dependency>
-	    		<groupId>org.apache.camel</groupId>
+	    	<groupId>org.apache.camel</groupId>
 			<artifactId>camel-core</artifactId>
 		</dependency>
 	    <dependency>
@@ -91,7 +91,11 @@
 			<groupId>org.apache.camel</groupId>
 			<artifactId>camel-cxf</artifactId>
 	    </dependency>
-	    
+        <!-- Used for camel-jackson component -->
+        <dependency>
+            <groupId>org.apache.camel</groupId>
+            <artifactId>camel-jackson</artifactId>
+        </dependency>
 	    <!-- Used for logging -->
 	    <dependency>
 			<groupId>org.slf4j</groupId>
