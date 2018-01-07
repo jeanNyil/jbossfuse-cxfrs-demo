@@ -13,5 +13,5 @@ The **_[Everit JSON validator library](https://github.com/everit-org/json-schema
 
 **TODO:** 
 - :camel: *Unmarshall the JSON file content in order to dynamically call the
-**_[IpService CXFRS server](../ipservice_cxfrs_server)_**
+_[IpService CXFRS server](../ipservice_cxfrs_server)_*
 - *__README TO BE COMPLETED__ with deployment and run instructions...*
