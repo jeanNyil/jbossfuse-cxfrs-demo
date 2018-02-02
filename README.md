@@ -3,7 +3,7 @@ Red Hat JBoss Fuse 6.3.0 projects to demo the usage of the camel CXFRS endpoints
 * [ipservice\_cxfrs\_server](ipservice_cxfrs_server)
 * [ipservice\_cxfrs\_client](ipservice_cxfrs_client)
 
-### :warning: WARNING
+### :warning: WARNING:
 - This project is configured to use a repository manager. 
 Thus, the [parent POM](pom.xml) points to my private [Sonatype Nexus Repository OSS](https://www.sonatype.com/download-oss-sonatype).
 My [Sonatype Nexus Repository OSS](https://www.sonatype.com/download-oss-sonatype) is configured to proxy the following 
@@ -20,5 +20,5 @@ tests according to the tested module:
     - [ipservice\_cxfrs\_server PID](ipservice_cxfrs_server/src/main/fabric8/org.jeannyil.fuse.demo.ipservicecxfrsserver.properties)
     - [ipservice\_cxfrs\_client PID](ipservice_cxfrs_client/src/main/fabric8/org.jeannyil.fuse.demo.ipservicecxfrsclient.properties)
 
-### :construction: TODO
+### :construction: TODO:
 - *[ipservice\_cxfrs\_client](ipservice_cxfrs_client)* to be COMPLETED...
