@@ -32,7 +32,7 @@ public class BuildErrorBeanProcessor implements Processor {
 		errorBean.setErrorMessage(exchange.getIn().getBody(String.class));
 		errorBean.setInputParameters(inputParameters);
 		
-		// Set the exchange body with the new erroBean
+		// Set the exchange body with the new errorBean
 		exchange.getIn().setBody(errorBean);
 	}
 

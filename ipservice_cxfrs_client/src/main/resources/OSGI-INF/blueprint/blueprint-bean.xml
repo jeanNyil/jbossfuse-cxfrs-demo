@@ -57,7 +57,7 @@
             <cm:property name="output.message.ttl.inms" value="300000"/>
             <cm:property name="json.file.input.path" value="/Users/jnyilimb/workspace/training/workingDir/in"/>
             <cm:property name="json.file.error.path" value="/Users/jnyilimb/workspace/training/workingDir/error"/>
-            <cm:property name="restful.service.base.url" value="https://fuse-standalone.lab.com:8443/cxf/rest"/>
+            <cm:property name="restful.service.base.url" value="https://fuse-standalone.lab.com:8443/cxf/demorest"/>
             <cm:property name="restful.service.ssl.truststore" value="/Users/jnyilimb/workspace/security/fuse/truststore.jks"/>
             <cm:property name="restful.service.ssl.truststore.password" value="P@ssw0rd"/>
         </cm:default-properties>

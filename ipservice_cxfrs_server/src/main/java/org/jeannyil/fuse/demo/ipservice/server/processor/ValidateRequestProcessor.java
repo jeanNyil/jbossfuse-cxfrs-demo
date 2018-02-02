@@ -17,7 +17,7 @@ public class ValidateRequestProcessor implements Processor {
 		String type = inMessage.getHeader(GeoLocationParametersEnum.TYPE.toString(),String.class);
         // Throw validationException if the input request type parameter is not valid
         if (!validateInputFormatType(type)) {
-        		exchange.setProperty(GeoLocationParametersEnum.TYPE.toString(), HandledOutputFormatsEnum.JSON.toString());
+        		exchange.setProperty(GeoLocationParametersEnum.TYPE.toString(), type);
         		exchange.setProperty(GeoLocationParametersEnum.IP.toString(),
         							 inMessage.getHeader(GeoLocationParametersEnum.IP.toString(), String.class));
         		throw new TypeValidationException("[" + type + "] parameter is not valid value for type parameter! - possible values: " +

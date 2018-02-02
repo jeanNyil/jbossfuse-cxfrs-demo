@@ -108,7 +108,7 @@
             <bean id="clientJsonProvider" class="com.fasterxml.jackson.jaxrs.json.JacksonJsonProvider"/>
         </cxf:providers>
     </cxf:rsClient>
-    <cxf:rsServer id="ipRsService" address="/rest"
+    <cxf:rsServer id="ipRsService" address="/demorest"
     		 serviceClass="org.jeannyil.fuse.demo.ipservice.server.resource.IpService"
     		 loggingFeatureEnabled="true">
         <cxf:providers>
@@ -119,7 +119,7 @@
             <bean class="org.apache.cxf.jaxrs.swagger.Swagger2Feature">
                 <property name="runAsFilter" value="true" />
                 <property name="host" value="${exposed.service.gateway.host}:${exposed.service.gateway.port}"/>
-                <property name="basePath" value="/cxf/rest"/>
+                <property name="basePath" value="/cxf/demorest"/>
                 <property name="title" value="RESTful IP/Hostname Service DEMO"/>
                 <property name="description" value="Camel CXFRS Demo :: A Red Hat JBoss Fuse 6.3.0 RESTful service that handles operations on an IP address or a hostname"/>
                 <property name="version" value="${project.version}"/>

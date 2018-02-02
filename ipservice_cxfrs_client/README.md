@@ -5,13 +5,13 @@ The features repository for a standalone deployment in a karaf container works f
 - The input parameters to call the **_[IpService CXFRS server](../ipservice_cxfrs_server)_** 
 are fetched from a JSON file.
 
-**ATTENTION:**
+:warning: **ATTENTION:**
 - Currently, the **_[IpService CXFRS server](../ipservice_cxfrs_server)_** 
 will be called **only if** the input JSON file is valid according to the 
 embedded _[inputMessageSchema.json](src/main/resources/Schemas/inputMessageSchema.json)_.
 The **_[Everit JSON validator library](https://github.com/everit-org/json-schema)_** is used.
 
-**TODO:** 
+:construction: **TODO:** 
 - :camel: *Unmarshall the JSON file content in order to dynamically call the
 _[IpService CXFRS server](../ipservice_cxfrs_server)_*
 - *__README TO BE COMPLETED__ with deployment and run instructions...*

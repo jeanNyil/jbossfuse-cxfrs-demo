@@ -1,10 +1,6 @@
 package org.jeannyil.fuse.demo.ipservice.server.resource;
 
-import javax.ws.rs.DefaultValue;
-import javax.ws.rs.GET;
-import javax.ws.rs.MatrixParam;
-import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
+import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
@@ -23,9 +19,9 @@ public class IpService {
 	@Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
 	@ApiOperation(httpMethod = "GET",
 				  value = "Get the geo-location for an IP address or a hostname",
-				  notes = "The following matrix parameters can optionnally be supplied: type, ip<br>" +
+				  notes = "The following optional query parameters can be supplied: type, ip<br>" +
 				  		  "The response format depends on the input type parameter: xml or json<br>" +
-						  "Request URI sample: /ipservice/geolocation;ip=redhat.com;type=json<br>" +
+						  "Request URI sample: /ipservice/geolocation?ip=redhat.com&type=json<br>" +
 				  		  "Corresponding JSON response:<br>" +
 						  "{<br/>" +
 						  "    \"ip\": \"209.132.183.105\",<br>" +
@@ -45,8 +41,8 @@ public class IpService {
 	        @ApiResponse(code = 400, message = "Invalid input parameters"),
 	        @ApiResponse(code = 500, message = "Internal server error")
 	        })
-	public Response getGeoLocation(@ApiParam(value = "Expected response format: xml or json - default: json", required = false) @MatrixParam("type") @DefaultValue("json") String type,
-								  @ApiParam(value = "IP address or hostname - default: empty", required = false) @MatrixParam("ip") @DefaultValue("") String ip) {
+	public Response getGeoLocation(@ApiParam(value = "Expected response format: xml or json - default: json", required = false) @QueryParam("type") @DefaultValue("json") String type,
+								   @ApiParam(value = "IP address or hostname - default: empty", required = false) @QueryParam("ip") @DefaultValue("") String ip) {
 		return null;
 	}
 
