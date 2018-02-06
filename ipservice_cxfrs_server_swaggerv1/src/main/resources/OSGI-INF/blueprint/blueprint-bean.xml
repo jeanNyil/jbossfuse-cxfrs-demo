@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+    JBoss, Home of Professional Open Source
+    Copyright 2014, Red Hat, Inc. and/or its affiliates, and individual
+    contributors by the @authors tag. See the copyright.txt in the
+    distribution for a full listing of individual contributors.
+
+    Licensed under the Apache License, Version 2.0 (the "License");
+    you may not use this file except in compliance with the License.
+    You may obtain a copy of the License at
+    http://www.apache.org/licenses/LICENSE-2.0
+    Unless required by applicable law or agreed to in writing, software
+    distributed under the License is distributed on an "AS IS" BASIS,
+    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    See the License for the specific language governing permissions and
+    limitations under the License.
+-->
+<!--
+   This is the OSGi Blueprint XML file defining the Camel context and routes.  Because the file is in the
+   OSGI-INF/blueprint directory inside our JAR, it will be automatically activated as soon as the bundle is installed.
+
+   The root element for any OSGi Blueprint file is 'blueprint' - you also see the namespace definitions for both the Blueprint
+   and the Camel namespaces.
+-->
+<blueprint xmlns="http://www.osgi.org/xmlns/blueprint/v1.0.0"
+    xmlns:cm="http://aries.apache.org/blueprint/xmlns/blueprint-cm/v1.1.0"
+    xmlns:cxf="http://camel.apache.org/schema/blueprint/cxf"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="
+           http://www.osgi.org/xmlns/blueprint/v1.0.0
+           https://www.osgi.org/xmlns/blueprint/v1.0.0/blueprint.xsd
+           http://camel.apache.org/schema/blueprint
+           http://camel.apache.org/schema/blueprint/camel-blueprint.xsd
+           http://aries.apache.org/blueprint/xmlns/blueprint-cm/v1.1.0
+           http://aries.apache.org/schemas/blueprint-cm/blueprint-cm-1.1.0.xsd">
+    <!-- PID -->
+    <cm:property-placeholder id="ipservice_cxfrsserver-props"
+        persistent-id="org.jeannyil.fuse.demo.ipservicecxfrsserver"
+        placeholder-prefix="${" placeholder-suffix="}" update-strategy="reload">
+	<cm:default-properties>
+            <cm:property name="context.name.application" value="demo-ipservice_cxfrs_server"/>
+            <cm:property name="camel.name.route" value="demo-ipservicecxfrsserver-route"/>
+            <cm:property name="notif.amq.destination" value="IPSERVICE.CXFRSSERVER.NOTIF.QUEUETIF.QUEUE"/>
+            <cm:property name="amqclient.ssl.truststore" value="/Users/jnyilimb/workspace/opt/esb/fabric/shared/security/ssl-demo-truststore.jks"/>
+            <cm:property name="amqclient.ssl.truststore.password" value="P@ssw0rd"/>
+            <cm:property name="amqclient.ssl.keystore" value="/Users/jnyilimb/workspace/security/openshift/client.ks"/>
+            <cm:property name="amqclient.ssl.keystore.password" value="P@ssw0rd"/>
+            <cm:property name="broker.out.url" value="failover:(ssl://fuse-standalone.lab.com:61616)?jms.useCompression=true"/>
+            <cm:property name="broker.user.name" value="amq"/>
+            <cm:property name="broker.user.password" value="amq@fabric"/>
+            <cm:property name="broker.max.connections" value="1"/>
+            <cm:property name="broker.max.activesessionperconnection" value="500"/>
+            <cm:property name="output.message.ttl.inms" value="300000"/>
+            <cm:property name="exposed.service.gateway.host" value="fuse-fabric8.lab.com"/>
+            <cm:property name="exposed.service.gateway.port" value="9000"/>
+            <cm:property name="restful.service.ssl.key.password" value="P@ssw0rd"/>
+            <cm:property name="restful.service.ssl.keystore.password" value="P@ssw0rd"/>
+            <cm:property name="restful.service.ssl.keystore" value="/home/jEAN/mnt/nfsshare/security/fuse-standalone.lab.com/jboss-amq/ssl-broker-keystore.jks"/>
+        </cm:default-properties>
+    </cm:property-placeholder>
+    <!--  ActiveMQ component with an SSL-secured pooledConnection factory -->
+    <bean class="org.apache.activemq.ActiveMQSslConnectionFactory" id="amqSslConnectionFactory">
+    		<property name="trustStore" value="${amqclient.ssl.truststore}"/>
+        <property name="trustStorePassword" value="${amqclient.ssl.truststore.password}"/>
+        <!--  <property name="keyStore" value="${amqclient.ssl.keystore}"/>
+        <property name="keyStorePassword" value="${amqclient.ssl.keystore.password}"/> -->
+        <property name="brokerURL" value="${broker.out.url}"/>
+        <property name="userName" value="${broker.user.name}"/>
+        <property name="password" value="${broker.user.password}"/>
+    </bean>
+    <bean class="org.apache.activemq.pool.PooledConnectionFactory"
+        destroy-method="stop" id="pooledConnectionFactory" init-method="start">
+        <property name="maxConnections" value="${broker.max.connections}"/>
+        <property name="maximumActiveSessionPerConnection" value="${broker.max.activesessionperconnection}"/>
+        <property name="connectionFactory" ref="amqSslConnectionFactory"/>
+    </bean>
+    <bean class="org.apache.camel.component.jms.JmsConfiguration" id="jmsConfig">
+        <property name="connectionFactory" ref="pooledConnectionFactory"/>
+    </bean>
+    <bean class="org.apache.activemq.camel.component.ActiveMQComponent" id="amq">
+        <property name="configuration" ref="jmsConfig"/>
+    </bean>
+    <!--  Processors -->
+    <bean
+    		class="org.jeannyil.fuse.demo.ipservice.server.processor.BuildErrorBeanProcessor" id="buildErrorBeanProcessor"/>
+    <bean
+        class="org.jeannyil.fuse.demo.ipservice.server.processor.FreeGeoIpRequestProcessor" id="freeGeoIpRequestProcessor"/>
+    <bean
+    		class="org.jeannyil.fuse.demo.ipservice.server.processor.PrepareRestResponseProcessor" id="prepareRestResponseProcessor"/>
+    <bean 
+    		class="org.jeannyil.fuse.demo.ipservice.server.processor.ValidateRequestProcessor" id="validateRequestProcessor"/>
+    <!-- Routes -->
+    <bean
+            class="org.jeannyil.fuse.demo.ipservice.server.route.IpServiceCxfRsServerMainRoute" id="ipServiceCxfRsServerMainRoute"/>
+    <bean
+            class="org.jeannyil.fuse.demo.ipservice.server.route.IpServiceGeoLocationRoute" id="ipServiceGeoLocationRoute"/>
+
+    <!-- Camel context -->
+    <camelContext allowUseOriginalMessage="false"
+                  id="ipservice-cxfrsserver-context" xmlns="http://camel.apache.org/schema/blueprint">
+        <routeBuilder ref="ipServiceCxfRsServerMainRoute"/>
+        <routeBuilder ref="ipServiceGeoLocationRoute"/>
+    </camelContext>
+
+    <!--  CxfRs endpoints -->
+    <cxf:rsClient id="freeGeoIpRsClient" address="http://freegeoip.net/"
+         serviceClass="org.jeannyil.fuse.demo.ipservice.server.endpoint.FreeGeoIp"
+         loggingFeatureEnabled="true">
+        <cxf:providers>
+            <bean id="clientJsonProvider" class="com.fasterxml.jackson.jaxrs.json.JacksonJsonProvider"/>
+        </cxf:providers>
+    </cxf:rsClient>
+    <cxf:rsServer id="ipRsService" address="/demorest"
+    		 serviceClass="org.jeannyil.fuse.demo.ipservice.server.resource.IpService"
+    		 loggingFeatureEnabled="true">
+        <cxf:providers>
+            <bean id="serverJsonProvider" class="com.fasterxml.jackson.jaxrs.json.JacksonJsonProvider"/>
+        </cxf:providers>
+        <!-- Enable Swagger -->
+        <cxf:features>
+            <bean class="io.fabric8.cxf.endpoint.SwaggerFeature">
+                <property name="runAsFilter" value="true" />
+                <property name="basePath" value="/demorest"/>
+                <property name="title" value="RESTful IP/Hostname Service DEMO"/>
+                <property name="description" value="Camel CXFRS Demo :: A Red Hat JBoss Fuse 6.3.0 RESTful service that handles operations on an IP address or a hostname"/>
+                <property name="version" value="${project.version}"/>
+                <property name="contact" value="jean.nyilimbibi@redhat.com"/>
+            </bean>
+		</cxf:features>
+	</cxf:rsServer>
+</blueprint>

@@ -1,17 +1,17 @@
 <?xml version="1.0"?>
 <project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd" xmlns="http://maven.apache.org/POM/4.0.0"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-  
+
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
 		<groupId>org.jeannyil.fuse</groupId>
 		<artifactId>cxfrs-demo</artifactId>
 		<version>1.0.0-SNAPSHOT</version>
   	</parent>
-	
-	<artifactId>ipservice_cxfrs_server</artifactId>
+
+	<artifactId>ipservice_cxfrs_server_swaggerv1</artifactId>
 	<packaging>bundle</packaging>
-	<name>Camel CXFRS Demo (swagger v2.0) :: IP-Service RESTful Server</name>
+	<name>Camel CXFRS Demo (swagger v1.2) :: IP-Service RESTful Server (swagger v1)</name>
 	<description>A Red Hat JBoss Fuse 6.3.0 RESTful service that handles operations on an IP address or a hostname</description>
 
 	<licenses>
@@ -27,9 +27,9 @@
 		<fabric8.abstractProfile>false</fabric8.abstractProfile>
 		<fabric8.features>swagger</fabric8.features>
 		<fabric8.parentProfiles>org-jeannyil-fuse-cxfrs-demo</fabric8.parentProfiles>
-		<fabric8.profile>org-jeannyil-fuse-cxfrs-demo-ipservice_cxfrs_server</fabric8.profile>
+		<fabric8.profile>org-jeannyil-fuse-cxfrs-demo-ipservice_cxfrs_server_swaggerv1</fabric8.profile>
 	</properties>
-	
+
 	<!--  Dependencies -->
 	<dependencies>
 		<!-- Used for camel cxfrs server endpoint -->
@@ -83,7 +83,7 @@
 			<scope>runtime</scope>
 		</dependency>
 	</dependencies>
-	
+
 	<!-- Configuration of the maven fabric-cxf-plugins for swagger -->
 	<build>
 		<!-- Resources -->

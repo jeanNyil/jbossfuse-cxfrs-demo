@@ -77,5 +77,4 @@ public class IpServiceCxfRsClientRoute extends RouteBuilder {
             .setHeader("ProcessedFile", exchangeProperty("ProcessedFile"))
 			.to(ExchangePattern.InOnly, "amq:{{notif.amq.destination}}?timeToLive={{output.message.ttl.inms}}");
 	}
-
 }

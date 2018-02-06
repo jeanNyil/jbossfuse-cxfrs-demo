@@ -26,7 +26,7 @@
 		<!-- Fabric8 profile configuration -->
     		<fabric8.abstractProfile>false</fabric8.abstractProfile>
     		<fabric8.featureRepos>mvn:org.jeannyil.fuse/ipservice_cxfrs_client/${project.version}/xml/features</fabric8.featureRepos>
-		<fabric8.features>everit-jsonschema-validator</fabric8.features>
+		    <fabric8.features>everit-jsonschema-validator</fabric8.features>
     		<fabric8.parentProfiles>org-jeannyil-fuse-cxfrs-demo</fabric8.parentProfiles>
     		<fabric8.profile>org-jeannyil-fuse-cxfrs-demo-ipservice_cxfrs_client</fabric8.profile>
 	</properties>
@@ -65,6 +65,17 @@
 	
 	<!-- Configuration of the build-helper-maven-plugin  -->
 	<build>
+		<!-- Resources -->
+		<resources>
+			<resource>
+				<directory>src/main/fabric8</directory>
+				<filtering>true</filtering>
+			</resource>
+			<resource>
+				<directory>src/main/resources</directory>
+				<filtering>true</filtering>
+			</resource>
+		</resources>
 		<plugins>
 			<!-- Attach the generated features file as an artifact,
 	             and publish to the maven repository -->
