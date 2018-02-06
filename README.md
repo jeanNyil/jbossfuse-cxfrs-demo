@@ -4,14 +4,14 @@ Red Hat JBoss Fuse 6.3.0 projects to demo the usage of the camel CXFRS endpoints
 * [ipservice\_cxfrs\_server\_swaggerv1](ipservice_cxfrs_server_swaggerv1) (```swagger v1.2```)
 * [ipservice\_cxfrs\_client](ipservice_cxfrs_client)
 
-## WARNING:
+## :warning: WARNING:
 - This project is configured to use a repository manager. 
 Thus, the [parent POM](pom.xml) points to my private [Sonatype Nexus Repository OSS](https://www.sonatype.com/download-oss-sonatype).
 My [Sonatype Nexus Repository OSS](https://www.sonatype.com/download-oss-sonatype) is configured to proxy the following 
 Red Hat maven repositories in addition to [Maven Central](https://repo1.maven.org/maven2):
   - https://maven.repository.redhat.com/ga 
   - https://maven.repository.redhat.com/earlyaccess/all
-  - :warning: Make sure you configure the [parent POM](pom.xml) to either point to
+  - Make sure you configure the [parent POM](pom.xml) to either point to
 your own maven repository manager or directly to [Maven Central](https://repo1.maven.org/maven2) and
 the two Red Hat maven repositories above.
 - Various PID properties need to be adjusted according to your environment:
