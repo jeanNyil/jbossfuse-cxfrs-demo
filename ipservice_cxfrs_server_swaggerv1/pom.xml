@@ -11,7 +11,7 @@
 
 	<artifactId>ipservice_cxfrs_server_swaggerv1</artifactId>
 	<packaging>bundle</packaging>
-	<name>Camel CXFRS Demo (swagger v1.2) :: IP-Service RESTful Server (swagger v1)</name>
+	<name>Camel CXFRS Demo (swagger v1.2) :: IP-Service RESTful Server</name>
 	<description>A Red Hat JBoss Fuse 6.3.0 RESTful service that handles operations on an IP address or a hostname</description>
 
 	<licenses>
