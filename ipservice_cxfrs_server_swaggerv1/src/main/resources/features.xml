@@ -6,7 +6,7 @@
   <repository>mvn:io.fabric8/fabric8-karaf/${fabric8.version}/xml/features</repository>
   <repository>mvn:org.apache.camel.karaf/apache-camel/${camel.version}/xml/features</repository>
 
-  <feature name="ipservice_cxfrs_swaggerv1_server" version="${project.version}" resolver="(obr)">
+  <feature name="ipservice_cxfrs_server_swaggerv1" version="${project.version}" resolver="(obr)">
       <feature version="${fabric8.version}">fabric-cxf</feature>
       <feature version="${fabric8.version}">fabric-cxf-registry</feature>
       <feature version="${fabric8.version}">activemq-camel</feature>

@@ -206,8 +206,8 @@
 
 	<!-- Modules -->
 	<modules>
-		<module>ipservice_cxfrs_server</module>
 		<module>ipservice_cxfrs_server_swaggerv1</module>
+		<module>ipservice_cxfrs_server_swaggerv2</module>
 		<module>ipservice_cxfrs_client</module>
 	</modules>
 
