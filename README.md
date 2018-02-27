@@ -5,6 +5,8 @@ Red Hat JBoss Fuse 6.3.0 projects to demo the usage of the camel CXFRS endpoints
 * [ipservice\_cxfrs\_client](ipservice_cxfrs_client)
 
 ## :warning: WARNING:
+- The *__Red Hat JBoss Fuse 6.3.0 Rollup 6 (v6.3.0.redhat-329) BOM__* is used in this project. So make sure you use the same patch version or
+  adapt to your current patch version of Red Hat JBoss Fuse 6.3.0
 - This project is configured to use a repository manager. 
 Thus, the [parent POM](pom.xml) points to my private [Sonatype Nexus Repository OSS](https://www.sonatype.com/download-oss-sonatype).
 My [Sonatype Nexus Repository OSS](https://www.sonatype.com/download-oss-sonatype) is configured to proxy the following 

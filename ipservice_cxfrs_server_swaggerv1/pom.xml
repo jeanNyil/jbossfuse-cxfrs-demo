@@ -53,16 +53,12 @@
 			<groupId>org.apache.cxf</groupId>
 			<artifactId>cxf-rt-frontend-jaxrs</artifactId>
 		</dependency>
-		<!--  Used with org.apache.cxf.jaxrs.swagger.Swagger2Feature bean -->
+		<!--  Used with io.fabric8.cxf.endpoint.SwaggerFeature bean -->
         <dependency>
             <groupId>io.fabric8</groupId>
             <artifactId>fabric-cxf-plugins</artifactId>
             <version>${fabric8.version}</version>
         </dependency>
-		<dependency>
-			<groupId>org.apache.cxf</groupId>
-			<artifactId>cxf-rt-rs-service-description</artifactId>
-		</dependency>
 		<!-- Used for testing - https://access.redhat.com/solutions/1609603 and https://issues.jboss.org/browse/ENTESB-2225
 	    	 Exclude in order to prevent java.lang.NullPointerException at
 	    	 org.apache.felix.fileinstall.internal.DirectoryWatcher.run(DirectoryWatcher.java:303) -->
