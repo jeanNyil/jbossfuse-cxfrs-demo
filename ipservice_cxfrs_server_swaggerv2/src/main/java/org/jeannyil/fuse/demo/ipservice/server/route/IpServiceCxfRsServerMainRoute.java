@@ -4,6 +4,7 @@ import org.apache.camel.LoggingLevel;
 import org.apache.camel.builder.RouteBuilder;
 import org.apache.camel.model.dataformat.JsonLibrary;
 import org.jeannyil.fuse.demo.ipservice.server.constants.ErrorTypesEnum;
+import org.jeannyil.fuse.demo.ipservice.server.constants.UtilHeadersEnum;
 
 public class IpServiceCxfRsServerMainRoute extends RouteBuilder {
 
@@ -16,7 +17,7 @@ public class IpServiceCxfRsServerMainRoute extends RouteBuilder {
 				.logStackTrace(true)
 				.logExhausted(true)
 				.logHandled(true)
-				.setProperty("errorType", constant(ErrorTypesEnum.ALLOTHER_ERROR.toString()))
+				.setProperty(UtilHeadersEnum.ERRORTYPE.toString(), constant(ErrorTypesEnum.ALLOTHER_ERROR.toString()))
 				// Set the exception message and build the ErrorBean
 				.transform().simple("${exception.message}")
 				.process("buildErrorBeanProcessor")
