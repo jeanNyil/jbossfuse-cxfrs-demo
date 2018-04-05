@@ -39,13 +39,15 @@
 	    </dependency>
 		<!--  Used for swagger -->
 		<dependency>
-			<groupId>org.apache.servicemix.bundles</groupId>
-			<artifactId>org.apache.servicemix.bundles.swagger-jaxrs</artifactId>
+			<groupId>io.swagger</groupId>
+			<artifactId>swagger-jaxrs</artifactId>
+			<version>1.5.9</version>
 			<optional>true</optional>
 			<exclusions>
+				<!-- avoid this old dependency which breaks CXF -->
 				<exclusion>
-					<groupId>javassist</groupId>
-					<artifactId>javassist</artifactId>
+					<groupId>javax.ws.rs</groupId>
+					<artifactId>jsr311-api</artifactId>
 				</exclusion>
 			</exclusions>
 		</dependency>
