@@ -25,7 +25,7 @@ are fetched from a JSON file. Below is an example in the JSON format:
     }
   ]
 }
-``
+```
 
 ## :warning: ATTENTION:
 - Currently, the **_[IpService CXFRS server](../ipservice_cxfrs_server)_** 
@@ -34,6 +34,4 @@ embedded _[inputMessageSchema.json](src/main/resources/Schemas/inputMessageSchem
 The **_[Everit JSON validator library](https://github.com/everit-org/json-schema)_** is used.
 
 ## :construction: TODO: 
-- :camel: *Unmarshall the JSON file content in order to dynamically call the
-_[IpService CXFRS server](../ipservice_cxfrs_server)_*
 - *__README TO BE COMPLETED__ with deployment and run instructions...*
