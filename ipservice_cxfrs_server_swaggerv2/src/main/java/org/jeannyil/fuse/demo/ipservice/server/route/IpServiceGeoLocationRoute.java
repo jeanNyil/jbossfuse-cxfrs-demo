@@ -12,8 +12,7 @@ public class IpServiceGeoLocationRoute extends RouteBuilder {
 
     @Override
     public void configure() throws Exception {
-        // Error handling
-        errorHandler(defaultErrorHandler().maximumRedeliveries(0));
+        // Error handling using Camel DefaultErrorHandler
         onException(TypeValidationException.class)
                 .handled(true) // Flag exception as handled
                 .logStackTrace(true)
@@ -62,15 +61,6 @@ public class IpServiceGeoLocationRoute extends RouteBuilder {
                 .process("freeGeoIpRequestProcessor")
                 .to("cxfrs:bean:freeGeoIpRsClient")
                 .log(LoggingLevel.INFO, "FreeGeoIp Service Response:\n ${body}")
-                // TODO later: marshal to Jaxb ou Json according to the request type :-D
-                /*.choice()
-                    .when(header("type").contains("json"))
-                        .marshal().json(JsonLibrary.Jackson, true) // transform the request to JSON :-D
-                        .log(LoggingLevel.INFO, "Returned JSON message: ${body}")
-                    .otherwise()
-                        .marshal().jaxb(true) //transform the request to XML :-D
-                        .log(LoggingLevel.INFO, "Returned XML message: ${body}")
-                .end()*/
                 .log(LoggingLevel.INFO, "The getGeoLocation RESTful service operation is DONE");
     }
 }

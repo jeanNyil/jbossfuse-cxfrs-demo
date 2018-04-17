@@ -5,8 +5,8 @@
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
 		<groupId>org.jeannyil.fuse</groupId>
-    		<artifactId>cxfrs-demo</artifactId>
-    		<version>1.0.0-SNAPSHOT</version>
+        <artifactId>cxfrs-demo</artifactId>
+        <version>1.0.0-SNAPSHOT</version>
   	</parent>
 
 	<artifactId>ipservice_cxfrs_client</artifactId>
@@ -23,12 +23,12 @@
     </licenses>
 
     <properties>
-		<!-- Fabric8 profile configuration -->
-    		<fabric8.abstractProfile>false</fabric8.abstractProfile>
-    		<fabric8.featureRepos>mvn:org.jeannyil.fuse/ipservice_cxfrs_client/${project.version}/xml/features</fabric8.featureRepos>
-		    <fabric8.features>everit-jsonschema-validator</fabric8.features>
-    		<fabric8.parentProfiles>org-jeannyil-fuse-cxfrs-demo</fabric8.parentProfiles>
-    		<fabric8.profile>org-jeannyil-fuse-cxfrs-demo-ipservice_cxfrs_client</fabric8.profile>
+        <!-- Fabric8 profile configuration -->
+        <fabric8.abstractProfile>false</fabric8.abstractProfile>
+        <fabric8.featureRepos>mvn:org.jeannyil.fuse/ipservice_cxfrs_client/${project.version}/xml/features</fabric8.featureRepos>
+        <fabric8.features>everit-jsonschema-validator camel-jsonpath</fabric8.features>
+        <fabric8.parentProfiles>org-jeannyil-fuse-cxfrs-demo</fabric8.parentProfiles>
+        <fabric8.profile>org-jeannyil-fuse-cxfrs-demo-ipservice_cxfrs_client</fabric8.profile>
 	</properties>
 	
 	<!-- Dependencies -->
@@ -49,18 +49,11 @@
             <groupId>com.fasterxml.jackson.jaxrs</groupId>
             <artifactId>jackson-jaxrs-json-provider</artifactId>
         </dependency>
-		<!-- Used for to avoid OSGI container error when running with camel:run maven goal
-		     See https://access.redhat.com/solutions/499763 -->
-		<dependency>
-			<groupId>org.osgi</groupId>
-			<artifactId>org.osgi.compendium</artifactId>
-			<scope>runtime</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.osgi</groupId>
-			<artifactId>org.osgi.core</artifactId>
-			<scope>runtime</scope>
-		</dependency>
+        <!-- Used for JSONPath -->
+        <dependency>
+            <groupId>org.apache.camel</groupId>
+            <artifactId>camel-jsonpath</artifactId>
+        </dependency>
 	</dependencies>
 	
 	<!-- Configuration of the build-helper-maven-plugin  -->

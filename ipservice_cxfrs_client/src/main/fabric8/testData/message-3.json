@@ -11,6 +11,20 @@
     {
       "ip_or_hostname": "org.example",
       "response_type": "csv"
+    },
+    {
+      "ip_or_hostname": "ipstack.com",
+      "response_type": "json"
+    },
+    {
+      "ip_or_hostname": "github.com",
+      "response_type": ""
+    },
+    {
+      "ip_or_hostname": "google.com"
+    },
+    {
+      "response_type": "xml"
     }
   ]
 }

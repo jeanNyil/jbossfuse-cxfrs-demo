@@ -24,5 +24,7 @@ tests according to the tested module:
     - [ipservice\_cxfrs\_server\_swaggerv2 PID](ipservice_cxfrs_server_swaggerv2/src/main/fabric8/org.jeannyil.fuse.demo.ipservicecxfrsserver.properties)
     - [ipservice\_cxfrs\_client PID](ipservice_cxfrs_client/src/main/fabric8/org.jeannyil.fuse.demo.ipservicecxfrsclient.properties)
 
-## :construction: TODO:
-- *[ipservice\_cxfrs\_client](ipservice_cxfrs_client)* to be optimized in order to generate dynamic requests according to input JSON files...
+## Screenshot samples
+
+### Red Hat JBoss Fuse 6.3.0 on Apache Karaf standalone deployment 
+![Fuse on Apache Karaf Standalone Deployment](images/Fuse_Standalone_Deployment.png)

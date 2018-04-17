@@ -35,6 +35,7 @@
         <feature version="${fabric8.version}">fabric-cxf</feature>
         <feature version="${fabric8.version}">activemq-camel</feature>
         <feature version="${camel.version}">camel-jackson</feature>
+        <feature version="${camel.version}">camel-jsonpath</feature>
         <bundle>mvn:org.jeannyil.fuse/ipservice_cxfrs_client/${project.version}</bundle>
     </feature>
 </features>

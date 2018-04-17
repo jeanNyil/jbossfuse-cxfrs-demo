@@ -10,8 +10,7 @@ public class IpServiceCxfRsServerMainRoute extends RouteBuilder {
 
 	@Override
 	public void configure() throws Exception {
-		// Error handling
-		errorHandler(defaultErrorHandler().maximumRedeliveries(0));
+		// Error handling using Camel DefaultErrorHandler
 		onException(Exception.class)
 				.handled(true) // Suppressing exception rethrow to the caller
 				.logStackTrace(true)
@@ -24,7 +23,7 @@ public class IpServiceCxfRsServerMainRoute extends RouteBuilder {
 				// Transform the ErrorBean message to JSON format
 				.marshal().json(JsonLibrary.Jackson, true)
 				// Wire-tap the JSON message to AMQ broker destination
-				.wireTap("amq:{{notif.amq.destination}}?timeToLive={{output.message.ttl.inms}}")
+				.wireTap("amq:{{error.amq.destination}}?timeToLive={{output.message.ttl.inms}}")
 				// Prepare and send an exception RESTful response to caller
 				.process("prepareRestResponseProcessor");
 

@@ -23,11 +23,11 @@
    and the Camel namespaces.
 -->
 <blueprint xmlns="http://www.osgi.org/xmlns/blueprint/v1.0.0"
-    xmlns:cm="http://aries.apache.org/blueprint/xmlns/blueprint-cm/v1.1.0"
-    xmlns:cxf="http://camel.apache.org/schema/blueprint/cxf"
-    xmlns:http-conf="http://cxf.apache.org/transports/http/configuration"
-    xmlns:sec="http://cxf.apache.org/configuration/security"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xmlns:cm="http://aries.apache.org/blueprint/xmlns/blueprint-cm/v1.1.0"
+           xmlns:cxf="http://camel.apache.org/schema/blueprint/cxf"
+           xmlns:http-conf="http://cxf.apache.org/transports/http/configuration"
+           xmlns:sec="http://cxf.apache.org/configuration/security"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
            xsi:schemaLocation="
            http://www.osgi.org/xmlns/blueprint/v1.0.0
            https://www.osgi.org/xmlns/blueprint/v1.0.0/blueprint.xsd
@@ -46,14 +46,17 @@
         <cm:default-properties>
             <cm:property name="context.name.application" value="demo-ipservice_cxfrs_client"/>
             <cm:property name="camel.name.route" value="demo-ipservice_cxfrs_client-route"/>
-            <cm:property name="notif.amq.destination" value="IPSERVICE.CXFRSCLIENT.NOTIF.QUEUE"/>
+            <cm:property name="notif.amq.destination" value="queue://IPSERVICE.CXFRSCLIENT.NOTIF.QUEUE"/>
+            <cm:property name="error.amq.destination" value="queue://IPSERVICE.CXFRSCLIENT.ERROR.QUEUE"/>
             <cm:property name="amqclient.ssl.truststore" value="/Users/jnyilimb/workspace/security/fuse/app-truststore.jks"/>
             <cm:property name="amqclient.ssl.truststore.password" value="P@ssw0rd"/>
-            <cm:property name="broker.out.url" value="failover:(ssl://fuse-fabric8.lab.com:60433)?jms.useCompression=true"/>
+            <cm:property name="broker.out.url" value="failover:(ssl://amq-standalone.lab.com:61443)?jms.useCompression=true"/>
             <cm:property name="broker.user.name" value="amq"/>
-            <cm:property name="broker.user.password" value="amq@fabric"/>
+            <cm:property name="broker.user.password" value="amq@standalone"/>
             <cm:property name="broker.max.connections" value="1"/>
             <cm:property name="broker.max.activesessionperconnection" value="500"/>
+            <cm:property name="http.client.connection.timeout.inms" value="60000"/>
+            <cm:property name="http.client.receive.timeout.inms" value="120000"/>
             <cm:property name="output.message.ttl.inms" value="300000"/>
             <cm:property name="json.file.input.path" value="/Users/jnyilimb/workspace/training/workingDir/in"/>
             <cm:property name="json.file.error.path" value="/Users/jnyilimb/workspace/training/workingDir/error"/>
@@ -95,7 +98,7 @@
         class="org.jeannyil.fuse.demo.ipservice.client.route.IpServiceCxfRsClientRoute" id="ipServiceCxfRsClientRoute"/>
 
     <!-- Camel context -->
-    <camelContext allowUseOriginalMessage="false"
+    <camelContext allowUseOriginalMessage="false" streamCache="true"
         id="ipservice-cxfrsclient-context" xmlns="http://camel.apache.org/schema/blueprint">
         <routeBuilder ref="ipServiceCxfRsClientRoute"/>
     </camelContext>
@@ -109,8 +112,9 @@
         </cxf:providers>
     </cxf:rsClient>
     
-    <!-- TLS configuration on the CXFRS Client endpoint  -->
+    <!-- CXFRS Client HTTP-Conduit configuration -->
     <http-conf:conduit id="ipservice-cxfrsclient-security" name="*.http-conduit">
+        <!-- TLS configuration -->
         <http-conf:tlsClientParameters>
             <sec:trustManagers>
                 <sec:keyStore type="JKS"
@@ -128,10 +132,11 @@
                 <sec:exclude>.*_DH_anon_.*</sec:exclude>
             </sec:cipherSuitesFilter>
         </http-conf:tlsClientParameters>
+        <!-- HTTP Client configuration -->
         <http-conf:client AutoRedirect="true"
                           Connection="Keep-Alive"
-                          ConnectionTimeout="60000"
-                          ReceiveTimeout="120000"/>
+                          ConnectionTimeout="${http.client.connection.timeout.inms}"
+                          ReceiveTimeout="${http.client.receive.timeout.inms}"/>
     </http-conf:conduit>
 
 </blueprint>

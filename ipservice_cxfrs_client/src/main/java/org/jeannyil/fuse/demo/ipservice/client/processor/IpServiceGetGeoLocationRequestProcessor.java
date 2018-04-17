@@ -8,6 +8,8 @@ import org.apache.camel.component.cxf.common.message.CxfConstants;
 import org.apache.cxf.message.MessageContentsList;
 import org.jeannyil.fuse.demo.ipservice.client.constants.IpServiceInputParametersEnum;
 
+import java.util.LinkedHashMap;
+
 public class IpServiceGetGeoLocationRequestProcessor implements Processor {
 
 	@Override
@@ -16,8 +18,9 @@ public class IpServiceGetGeoLocationRequestProcessor implements Processor {
         Message inMessage = exchange.getIn();
          
         //creating the request
-        String ipOrHostname = inMessage.getHeader(IpServiceInputParametersEnum.IP.toString(), String.class);
-        String expectedResponseFormat = inMessage.getHeader(IpServiceInputParametersEnum.TYPE.toString(),String.class);
+        LinkedHashMap<String,String> parameters = (LinkedHashMap<String, String>) inMessage.getBody();
+        String ipOrHostname = parameters.getOrDefault(IpServiceInputParametersEnum.IP.toString(), "");
+        String expectedResponseFormat = parameters.getOrDefault(IpServiceInputParametersEnum.TYPE.toString(),"json");
         	
         MessageContentsList req = new MessageContentsList();
         req.add(expectedResponseFormat);

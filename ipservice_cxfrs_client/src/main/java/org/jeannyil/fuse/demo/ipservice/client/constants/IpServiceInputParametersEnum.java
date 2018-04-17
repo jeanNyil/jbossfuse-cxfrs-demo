@@ -1,8 +1,8 @@
 package org.jeannyil.fuse.demo.ipservice.client.constants;
 
 public enum IpServiceInputParametersEnum {
-	IP("ip"),
-	TYPE("type");
+	IP("ip_or_hostname"),
+	TYPE("response_type");
 	
 	private String inputParameter;
 	

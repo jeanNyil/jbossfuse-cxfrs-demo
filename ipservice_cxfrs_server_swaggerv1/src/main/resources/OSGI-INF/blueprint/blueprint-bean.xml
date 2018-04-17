@@ -23,24 +23,28 @@
    and the Camel namespaces.
 -->
 <blueprint xmlns="http://www.osgi.org/xmlns/blueprint/v1.0.0"
-    xmlns:cm="http://aries.apache.org/blueprint/xmlns/blueprint-cm/v1.1.0"
-    xmlns:cxf="http://camel.apache.org/schema/blueprint/cxf"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xmlns:cm="http://aries.apache.org/blueprint/xmlns/blueprint-cm/v1.1.0"
+           xmlns:cxf="http://camel.apache.org/schema/blueprint/cxf"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xmlns:http-conf="http://cxf.apache.org/transports/http/configuration"
            xsi:schemaLocation="
            http://www.osgi.org/xmlns/blueprint/v1.0.0
            https://www.osgi.org/xmlns/blueprint/v1.0.0/blueprint.xsd
            http://camel.apache.org/schema/blueprint
            http://camel.apache.org/schema/blueprint/camel-blueprint.xsd
            http://aries.apache.org/blueprint/xmlns/blueprint-cm/v1.1.0
-           http://aries.apache.org/schemas/blueprint-cm/blueprint-cm-1.1.0.xsd">
+           http://aries.apache.org/schemas/blueprint-cm/blueprint-cm-1.1.0.xsd
+           http://cxf.apache.org/transports/http/configuration
+           http://cxf.apache.org/schemas/configuration/http-conf.xsd">
     <!-- PID -->
     <cm:property-placeholder id="ipservice_cxfrsserver-props"
         persistent-id="org.jeannyil.fuse.demo.ipservicecxfrsserver"
         placeholder-prefix="${" placeholder-suffix="}" update-strategy="reload">
-	<cm:default-properties>
+	    <cm:default-properties>
             <cm:property name="context.name.application" value="demo-ipservice_cxfrs_server"/>
             <cm:property name="camel.name.route" value="demo-ipservicecxfrsserver-route"/>
-            <cm:property name="notif.amq.destination" value="IPSERVICE.CXFRSSERVER.NOTIF.QUEUETIF.QUEUE"/>
+            <cm:property name="notif.amq.destination" value="queue://IPSERVICE.CXFRSSERVER.NOTIF.QUEUE"/>
+            <cm:property name="error.amq.destination" value="queue://IPSERVICE.CXFRSSERVER.ERROR.QUEUE"/>
             <cm:property name="amqclient.ssl.truststore" value="/Users/jnyilimb/workspace/security/fuse/app-truststore.jks"/>
             <cm:property name="amqclient.ssl.truststore.password" value="P@ssw0rd"/>
             <cm:property name="broker.out.url" value="failover:(ssl://amq-standalone.lab.com:61616)?jms.useCompression=true"/>
@@ -49,6 +53,8 @@
             <cm:property name="broker.max.connections" value="1"/>
             <cm:property name="broker.max.activesessionperconnection" value="500"/>
             <cm:property name="output.message.ttl.inms" value="300000"/>
+            <cm:property name="restful.service.ssl.truststore" value="/Users/jnyilimb/workspace/security/fuse/truststore.jks"/>
+            <cm:property name="restful.service.ssl.truststore.password" value="P@ssw0rd"/>
         </cm:default-properties>
     </cm:property-placeholder>
     <!--  ActiveMQ component with an SSL-secured pooledConnection factory -->
@@ -87,7 +93,7 @@
             class="org.jeannyil.fuse.demo.ipservice.server.route.IpServiceGeoLocationRoute" id="ipServiceGeoLocationRoute"/>
 
     <!-- Camel context -->
-    <camelContext allowUseOriginalMessage="false"
+    <camelContext allowUseOriginalMessage="false" streamCache="true"
                   id="ipservice-cxfrsserver-context" xmlns="http://camel.apache.org/schema/blueprint">
         <routeBuilder ref="ipServiceCxfRsServerMainRoute"/>
         <routeBuilder ref="ipServiceGeoLocationRoute"/>
@@ -119,4 +125,13 @@
             </bean>
 		</cxf:features>
 	</cxf:rsServer>
+
+    <!-- CXFRS Client HTTP-Conduit configuration -->
+    <http-conf:conduit id="ipservice-cxfrsclient-httpconduit" name="*.http-conduit">
+        <!-- HTTP Client configuration -->
+        <http-conf:client AutoRedirect="true"
+                          Connection="Keep-Alive"
+                          ConnectionTimeout="${http.client.connection.timeout.inms}"
+                          ReceiveTimeout="${http.client.receive.timeout.inms}"/>
+    </http-conf:conduit>
 </blueprint>
