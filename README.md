@@ -28,3 +28,6 @@ tests according to the tested module:
 
 ### Red Hat JBoss Fuse 6.3.0 on Apache Karaf standalone deployment 
 ![Fuse on Apache Karaf Standalone Deployment](images/Fuse_Standalone_Deployment.png)
+
+### Red Hat JBoss Fuse 6.3.0 on Apache Karaf deployment as a fabric8 cluster
+![Fuse on Apache Karaf Fabric Cluster Deployment](images/Fuse_Fabric8_Deployment.png)
