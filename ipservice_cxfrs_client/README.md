@@ -27,9 +27,10 @@ are fetched from a JSON file. Below is an example in the JSON format:
 }
 ```
 
-## :warning: ATTENTION:
-- Currently, the **_[IpService CXFRS server](../ipservice_cxfrs_server)_** 
-will be called **only if** the input JSON file is valid according to the _[inputMessageSchema.json](src/main/resources/Schemas/inputMessageSchema.json)_.
+## :warning: Attention:
+The **_[IpService CXFRS server](../ipservice_cxfrs_server)_** 
+will be called **ONLY IF** the input JSON file is valid according to the _[inputMessageSchema.json](src/main/resources/Schemas/inputMessageSchema.json)_.
+
 The **_[Everit JSON validator library](https://github.com/everit-org/json-schema)_** is used for JSON validation.
 
 ## Deployment on a standalone instance of _Red Hat Fuse 6.3.0/Apache Karaf_ 
@@ -43,7 +44,7 @@ is running as a standalone instance
 ### Deployment instructions
 
 - Create the `org.jeannyil.fuse.demo.ipservicecxfrsclient.cfg` _Persistent ID_ file in the *__<red_hat_fuse_install_directory>/etc__* with the 
-following content. :warning: You have to adapt the following properties according to your run-time environment:
+following content. You have to adapt the following properties according to your run-time environment:
   - `amqclient.ssl.truststore`: path to the truststore containing the AMQ broker public certificate
   - `amqclient.ssl.truststore.password`: password of the truststore
   - `broker.out.url`: _Red Hat JBoss AMQ_ broker connection url (openwire)
