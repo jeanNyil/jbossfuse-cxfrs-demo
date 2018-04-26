@@ -1,7 +1,7 @@
 # jbossfuse-cxfrs-demo
 Red Hat JBoss Fuse 6.3.0 projects to demo the usage of the camel CXFRS endpoints in order to expose or consume RESTful services running on Apache KARAF containers (RH JBoss Fuse standalone or in a Fabric8 environment)
-* [ipservice\_cxfrs\_server\_swaggerv1](ipservice_cxfrs_server_swaggerv1) (```swagger v1.2```)
-* [ipservice\_cxfrs\_server\_swaggerv2](ipservice_cxfrs_server_swaggerv2) (```swagger v2.0```)
+* [ipservice\_cxfrs\_server\_swaggerv1](ipservice_cxfrs_server_swaggerv1) (`swagger v1.2`)
+* [ipservice\_cxfrs\_server\_swaggerv2](ipservice_cxfrs_server_swaggerv2) (`swagger v2.0`)
 * [ipservice\_cxfrs\_client](ipservice_cxfrs_client)
 
 ## :warning: WARNING:
@@ -17,12 +17,45 @@ Red Hat maven repositories in addition to [Maven Central](https://repo1.maven.or
 your own maven repository manager or directly to [Maven Central](https://repo1.maven.org/maven2) and
 the two Red Hat maven repositories above.
 - Various PID properties need to be adjusted according to your environment:
-  - either within the projects blueprint for local tests with ```camel:run``` maven goal
-  - either within the [parent PID](src/main/fabric8/org.jeannyil.fuse.cxfrs.demo.properties) and the following PID files for container runtime (Apache Karaf standalone or managed by Fabric8)
+  - either within the projects blueprint for local tests with `camel:run` maven goal
+  - either within the [parent PID](src/main/fabric8/org.jeannyil.fuse.cxfrs.demo.properties) and the following PID files for container runtime (_Apache Karaf_ standalone or managed by _Fabric8_)
 tests according to the tested module:
     - [ipservice\_cxfrs\_server\_swaggerv1 PID](ipservice_cxfrs_server_swaggerv1/src/main/fabric8/org.jeannyil.fuse.demo.ipservicecxfrsserver.properties)
     - [ipservice\_cxfrs\_server\_swaggerv2 PID](ipservice_cxfrs_server_swaggerv2/src/main/fabric8/org.jeannyil.fuse.demo.ipservicecxfrsserver.properties)
     - [ipservice\_cxfrs\_client PID](ipservice_cxfrs_client/src/main/fabric8/org.jeannyil.fuse.demo.ipservicecxfrsclient.properties)
+
+## Build instructions
+
+All three modules can be built from the parent project (_[jbossfuse-cxfrs-demo](../jbossfuse-cxfrs-demo)_).
+
+Please follow the instructions below according to the target deployment type: standalone or in a _fabric8_ cluster
+
+### Build for a standalone deployment
+
+```
+$ cd jbossfuse-cxfrs-demo
+$ mvn clean install
+```
+
+### Build for a _fabric8_ cluster deployment
+
+```
+$ cd jbossfuse-cxfrs-demo
+$ mvn clean package fabric8:zip install
+```
+
+Four _fabric8_ profiles are generated:
+- `org-jeannyil-fuse-cxfrs-demo`: the parent _fabric8_ profile for all the modules
+- `org-jeannyil-fuse-cxfrs-demo-ipservice_cxfrs_client`: the [ipservice\_cxfrs\_client](ipservice_cxfrs_client) module _fabric8_ profile
+- `org-jeannyil-fuse-cxfrs-demo-ipservice_cxfrs_server_swaggerv1`: the [ipservice\_cxfrs\_server\_swaggerv1](ipservice_cxfrs_server_swaggerv1) _fabric8_ profile
+- `org-jeannyil-fuse-cxfrs-demo-ipservice_cxfrs_server_swaggerv2`: the [ipservice\_cxfrs\_server\_swaggerv2](ipservice_cxfrs_server_swaggerv2) _fabric8_ profile
+
+## Deployment and test instructions
+
+Deployment and test instructions for each module can be found in its _README_ accordingly:
+- [ipservice\_cxfrs\_server\_swaggerv1](ipservice_cxfrs_server_swaggerv1/README.md)
+- [ipservice\_cxfrs\_server\_swaggerv2](ipservice_cxfrs_server_swaggerv2/README.md)
+- [ipservice\_cxfrs\_client](ipservice_cxfrs_client/README.md)
 
 ## Screenshot samples
 
