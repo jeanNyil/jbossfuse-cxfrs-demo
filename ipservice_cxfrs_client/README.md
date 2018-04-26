@@ -107,51 +107,24 @@ as a standalone instance outside the _fabric8_ cluster
 - Below are extracts of my `org-jeannyil-fuse-cxfrs-demo` and `org-jeannyil-fuse-cxfrs-demo-ipservice_cxfrs_client` _fabric8_ profiles:
 ```
 $ fabric:profile-display org-jeannyil-fuse-cxfrs-demo
-  Profile id: org-jeannyil-fuse-cxfrs-demo
-  Version   : 1.0
-  Attributes:
-  	parents: default feature-camel feature-camel-jms feature-cxf
-  Containers:
-  
-  Container settings
-  ----------------------------
-  Features :
-  	camel-jackson
-  	cxf-commands
-  	camel-cxf
-  	camel-amq
-  
-  Configuration details
-  ----------------------------
-  PID: org.jeannyil.fuse.cxfrs.demo
-    broker.out.url discovery:(fabric://ssl-demo-broker)
-    amqclient.ssl.truststore /home/jEAN/mnt/nfsshare/security/jboss-fuse/truststore.jks
-    broker.max.activesessionperconnection 500
-    broker.max.connections 1
-    broker.user.name amq
-    broker.user.password amq@fabric
-    amqclient.ssl.truststore.password P@ssw0rd
-    output.message.ttl.inms 3600000
-    [...]
+Profile id: org-jeannyil-fuse-cxfrs-demo
+[...]
+Configuration details
+----------------------------
+PID: org.jeannyil.fuse.cxfrs.demo
+  broker.out.url discovery:(fabric://ssl-demo-broker)
+  amqclient.ssl.truststore /home/jEAN/mnt/nfsshare/security/jboss-fuse/truststore.jks
+  broker.max.activesessionperconnection 500
+  broker.max.connections 1
+  broker.user.name amq
+  broker.user.password amq@fabric
+  amqclient.ssl.truststore.password P@ssw0rd
+  output.message.ttl.inms 3600000
+[...]
+
 $ fabric:profile-display org-jeannyil-fuse-cxfrs-demo-ipservice_cxfrs_client
 Profile id: org-jeannyil-fuse-cxfrs-demo-ipservice_cxfrs_client
-Version   : 1.0
-Attributes:
-	parents: org-jeannyil-fuse-cxfrs-demo
-Containers: cxfrs_client-node
-
-Container settings
-----------------------------
-Repositories :
-	mvn:org.jeannyil.fuse/ipservice_cxfrs_client/1.0.0-SNAPSHOT/xml/features
-
-Features :
-	everit-jsonschema-validator
-	camel-jsonpath
-
-Bundles :
-	mvn:org.jeannyil.fuse/ipservice_cxfrs_client/1.0.0-SNAPSHOT
-
+[...]
 Configuration details
 ----------------------------
 PID: org.jeannyil.fuse.demo.ipservicecxfrsclient
@@ -174,7 +147,7 @@ PID: org.jeannyil.fuse.demo.ipservicecxfrsclient
   json.file.error.path /home/jEAN/mnt/nfsshare/working/fuse-fabric8.lab.com/workingDir/error
   camel.name.route demo-ipservice_cxfrs_client-route
   output.message.ttl.inms ${profile:org.jeannyil.fuse.cxfrs.demo/output.message.ttl.inms}
-  [...]
+[...]
 ```
 - Deploy the `org-jeannyil-fuse-cxfrs-demo-ipservice_cxfrs_client`_fabric8_ profile:
   - On an existing _fabric8 karaf_ container using the `fabric:container-add-profile` command.
