@@ -43,16 +43,8 @@ is running as a standalone instance
 
 ### Deployment instructions
 
-- Create the `org.jeannyil.fuse.demo.ipservicecxfrsclient.cfg` _Persistent ID_ file in the *__<red_hat_fuse_install_directory>/etc__* with the 
-following content. You have to adapt the following properties according to your run-time environment:
-  - `amqclient.ssl.truststore`: path to the truststore containing the AMQ broker public certificate
-  - `amqclient.ssl.truststore.password`: password of the truststore
-  - `broker.out.url`: _Red Hat JBoss AMQ_ broker connection url (openwire)
-  - `broker.user.name` and `broker.user.password`: credentials to connect to the _Red Hat JBoss AMQ_ broker
-  - `json.file.input.path` and `json.file.error.path`: working directories (respectively input and error) for the `ipservice_cxfrs_client` bundle 
-  - `restful.service.base.url`: base URL of the the **[ipservice_cxfrs_server](../ipservice_cxfrs_server_swaggerv2)** RESTful service
-  - `restful.service.ssl.truststore`: path to the truststore containing the **[ipservice_cxfrs_server](../ipservice_cxfrs_server_swaggerv2)** RESTful service public certificate
-  - `restful.service.ssl.truststore.password`: password of the truststore
+- Create the `org.jeannyil.fuse.demo.ipservicecxfrsclient.cfg` _Persistent ID_ file in the `<red_hat_fuse_install_directory>/etc` directory with the 
+following content:
 ```
 context.name.application=demo-ipservice_cxfrs_client
 camel.name.route=demo-ipservice_cxfrs_client-route
@@ -74,6 +66,15 @@ restful.service.base.url=https://fuse-standalone.lab.com:8443/cxf/demorest
 restful.service.ssl.truststore=/home/jEAN/mnt/nfsshare/security/fuse-standalone.lab.com/jboss-fuse/app-truststore.jks
 restful.service.ssl.truststore.password=P@ssw0rd
 ```
+- Adapt the following properties according to your run-time environment:
+  - `amqclient.ssl.truststore`: path to the truststore containing the AMQ broker public certificate
+  - `amqclient.ssl.truststore.password`: password of the truststore
+  - `broker.out.url`: _Red Hat JBoss AMQ_ broker connection url (openwire)
+  - `broker.user.name` and `broker.user.password`: credentials to connect to the _Red Hat JBoss AMQ_ broker
+  - `json.file.input.path` and `json.file.error.path`: working directories (respectively input and error) for the `ipservice_cxfrs_client` bundle 
+  - `restful.service.base.url`: base URL of the the **[ipservice_cxfrs_server](../ipservice_cxfrs_server_swaggerv2)** RESTful service
+  - `restful.service.ssl.truststore`: path to the truststore containing the **[ipservice_cxfrs_server](../ipservice_cxfrs_server_swaggerv2)** RESTful service public certificate
+  - `restful.service.ssl.truststore.password`: password of the truststore
 - Log into the _Red Hat Fuse Karaf_ terminal and deploy the `ipservice_cxfrs_client`feature:
 ```
 $ features:addurl mvn:org.jeannyil.fuse/ipservice_cxfrs_client/1.0.0-SNAPSHOT/xml/features
@@ -92,64 +93,67 @@ as a standalone instance outside the _fabric8_ cluster
 ### Deployment instructions
 
 - Log into the _Red Hat Fuse Karaf_ terminal
-- Use the `fabric:profile-edit` command to adapt _Persistent ID_ properties for the following _fabric8_ profiles:
-  - `org.jeannyil.fuse.cxfrs.demo` _Persistent ID_ in the `org-jeannyil-fuse-cxfrs-demo` _fabric8_ profile.
-  Example: `fabric:profile-edit -p org.jeannyil.fuse.cxfrs.demo/broker.user.name=amq org-jeannyil-fuse-cxfrs-demo`
-    - `amqclient.ssl.truststore`: path to the truststore containing the AMQ broker public certificate
-    - `amqclient.ssl.truststore.password`: password of the truststore
-    - `broker.out.url`: _Red Hat JBoss AMQ_ broker connection url (openwire)
-    - `broker.user.name` and `broker.user.password`: credentials to connect to the _Red Hat JBoss AMQ_ broker
-  - `org.jeannyil.fuse.demo.ipservicecxfrsclient` _Persistent ID_ in the `org-jeannyil-fuse-cxfrs-demo-ipservice_cxfrs_client` _fabric8_ profile.
-  Example: `fabric:profile-edit -p org.jeannyil.fuse.demo.ipservicecxfrsclient/restful.service.base.url=https://fuse-01.lab.com:9095/version/1.0/cxf/demorest org-jeannyil-fuse-cxfrs-demo-ipservice_cxfrs_client`
-    - `json.file.input.path` and `json.file.error.path`: working directories (respectively input and error) for the `ipservice_cxfrs_client` bundle 
-    - `restful.service.base.url`: base URL of the the **[ipservice_cxfrs_server](../ipservice_cxfrs_server_swaggerv2)** RESTful service
-    - `restful.service.ssl.truststore`: path to the truststore containing the **[ipservice_cxfrs_server](../ipservice_cxfrs_server_swaggerv2)** RESTful service public certificate
-    - `restful.service.ssl.truststore.password`: password of the truststore
-- Below are extracts of my `org-jeannyil-fuse-cxfrs-demo` and `org-jeannyil-fuse-cxfrs-demo-ipservice_cxfrs_client` _fabric8_ profiles:
-```
-$ fabric:profile-display org-jeannyil-fuse-cxfrs-demo
-Profile id: org-jeannyil-fuse-cxfrs-demo
-[...]
-Configuration details
-----------------------------
-PID: org.jeannyil.fuse.cxfrs.demo
-  broker.out.url discovery:(fabric://ssl-demo-broker)
-  amqclient.ssl.truststore /home/jEAN/mnt/nfsshare/security/jboss-fuse/truststore.jks
-  broker.max.activesessionperconnection 500
-  broker.max.connections 1
-  broker.user.name amq
-  broker.user.password amq@fabric
-  amqclient.ssl.truststore.password P@ssw0rd
-  output.message.ttl.inms 3600000
-[...]
-
-$ fabric:profile-display org-jeannyil-fuse-cxfrs-demo-ipservice_cxfrs_client
-Profile id: org-jeannyil-fuse-cxfrs-demo-ipservice_cxfrs_client
-[...]
-Configuration details
-----------------------------
-PID: org.jeannyil.fuse.demo.ipservicecxfrsclient
-  error.amq.destination queue://IPSERVICE.CXFRSCLIENT.ERROR.QUEUE
-  broker.out.url ${profile:org.jeannyil.fuse.cxfrs.demo/broker.out.url}
-  restful.service.ssl.truststore /home/jEAN/mnt/nfsshare/security/jboss-fuse/truststore.jks
-  broker.max.activesessionperconnection ${profile:org.jeannyil.fuse.cxfrs.demo/broker.max.activesessionperconnection}
-  broker.max.connections ${profile:org.jeannyil.fuse.cxfrs.demo/broker.max.connections}
-  restful.service.ssl.truststore.password P@ssw0rd
-  http.client.receive.timeout.inms 120000
-  restful.service.base.url https://fuse-01.lab.com:9095/version/1.0/cxf/demorest
-  notif.amq.destination queue://IPSERVICE.CXFRSCLIENT.NOTIF.QUEUE
-  broker.user.password ${profile:org.jeannyil.fuse.cxfrs.demo/broker.user.password}
-  amqclient.ssl.truststore.password ${profile:org.jeannyil.fuse.cxfrs.demo/amqclient.ssl.truststore.password}
-  amqclient.ssl.truststore ${profile:org.jeannyil.fuse.cxfrs.demo/amqclient.ssl.truststore}
-  context.name.application demo-ipservice_cxfrs_client
-  broker.user.name ${profile:org.jeannyil.fuse.cxfrs.demo/broker.user.name}
-  http.client.connection.timeout.inms 60000
-  json.file.input.path /home/jEAN/mnt/nfsshare/working/fuse-fabric8.lab.com/workingDir/in
-  json.file.error.path /home/jEAN/mnt/nfsshare/working/fuse-fabric8.lab.com/workingDir/error
-  camel.name.route demo-ipservice_cxfrs_client-route
-  output.message.ttl.inms ${profile:org.jeannyil.fuse.cxfrs.demo/output.message.ttl.inms}
-[...]
-```
+- Use the `fabric:profile-edit` command (example: `fabric:profile-edit -p org.jeannyil.fuse.cxfrs.demo/broker.user.name=amq org-jeannyil-fuse-cxfrs-demo`) 
+to adapt _Persistent ID_ properties for the following _fabric8_ profiles:
+  - `org-jeannyil-fuse-cxfrs-demo` _fabric8_ profile`
+    - Update the following `org.jeannyil.fuse.cxfrs.demo` _Persistent ID_ properties: 
+      - `amqclient.ssl.truststore`: path to the truststore containing the AMQ broker public certificate
+      - `amqclient.ssl.truststore.password`: password of the truststore
+      - `broker.out.url`: _Red Hat JBoss AMQ_ broker connection url (openwire)
+      - `broker.user.name` and `broker.user.password`: credentials to connect to the _Red Hat JBoss AMQ_ broker
+    - Below is an extract of my `org-jeannyil-fuse-cxfrs-demo` _fabric8_ profile:
+    ```
+    $ fabric:profile-display org-jeannyil-fuse-cxfrs-demo
+    Profile id: org-jeannyil-fuse-cxfrs-demo
+    [...]
+    Configuration details
+    ----------------------------
+    PID: org.jeannyil.fuse.cxfrs.demo
+      broker.out.url discovery:(fabric://ssl-demo-broker)
+      amqclient.ssl.truststore /home/jEAN/mnt/nfsshare/security/jboss-fuse/truststore.jks
+      broker.max.activesessionperconnection 500
+      broker.max.connections 1
+      broker.user.name amq
+      broker.user.password amq@fabric
+      amqclient.ssl.truststore.password P@ssw0rd
+      output.message.ttl.inms 3600000
+    [...]
+    ```
+  - `org-jeannyil-fuse-cxfrs-demo-ipservice_cxfrs_client` _fabric8_ profile
+    - Update the following `org.jeannyil.fuse.demo.ipservicecxfrsclient` _Persistent ID_ properties:
+      - `json.file.input.path` and `json.file.error.path`: working directories (respectively input and error) for the `ipservice_cxfrs_client` bundle 
+      - `restful.service.base.url`: base URL of the the **[ipservice_cxfrs_server](../ipservice_cxfrs_server_swaggerv2)** RESTful service
+      - `restful.service.ssl.truststore`: path to the truststore containing the **[ipservice_cxfrs_server](../ipservice_cxfrs_server_swaggerv2)** RESTful service public certificate
+      - `restful.service.ssl.truststore.password`: password of the truststore
+    - Below is an extract of my `org-jeannyil-fuse-cxfrs-demo-ipservice_cxfrs_client` _fabric8_ profiles:
+    ```
+    $ fabric:profile-display org-jeannyil-fuse-cxfrs-demo-ipservice_cxfrs_client
+    Profile id: org-jeannyil-fuse-cxfrs-demo-ipservice_cxfrs_client
+    [...]
+    Configuration details
+    ----------------------------
+    PID: org.jeannyil.fuse.demo.ipservicecxfrsclient
+      error.amq.destination queue://IPSERVICE.CXFRSCLIENT.ERROR.QUEUE
+      broker.out.url ${profile:org.jeannyil.fuse.cxfrs.demo/broker.out.url}
+      restful.service.ssl.truststore /home/jEAN/mnt/nfsshare/security/jboss-fuse/truststore.jks
+      broker.max.activesessionperconnection ${profile:org.jeannyil.fuse.cxfrs.demo/broker.max.activesessionperconnection}
+      broker.max.connections ${profile:org.jeannyil.fuse.cxfrs.demo/broker.max.connections}
+      restful.service.ssl.truststore.password P@ssw0rd
+      http.client.receive.timeout.inms 120000
+      restful.service.base.url https://fuse-01.lab.com:9095/version/1.0/cxf/demorest
+      notif.amq.destination queue://IPSERVICE.CXFRSCLIENT.NOTIF.QUEUE
+      broker.user.password ${profile:org.jeannyil.fuse.cxfrs.demo/broker.user.password}
+      amqclient.ssl.truststore.password ${profile:org.jeannyil.fuse.cxfrs.demo/amqclient.ssl.truststore.password}
+      amqclient.ssl.truststore ${profile:org.jeannyil.fuse.cxfrs.demo/amqclient.ssl.truststore}
+      context.name.application demo-ipservice_cxfrs_client
+      broker.user.name ${profile:org.jeannyil.fuse.cxfrs.demo/broker.user.name}
+      http.client.connection.timeout.inms 60000
+      json.file.input.path /home/jEAN/mnt/nfsshare/working/fuse-fabric8.lab.com/workingDir/in
+      json.file.error.path /home/jEAN/mnt/nfsshare/working/fuse-fabric8.lab.com/workingDir/error
+      camel.name.route demo-ipservice_cxfrs_client-route
+      output.message.ttl.inms ${profile:org.jeannyil.fuse.cxfrs.demo/output.message.ttl.inms}
+    [...]
+    ```
 - Deploy the `org-jeannyil-fuse-cxfrs-demo-ipservice_cxfrs_client`_fabric8_ profile:
   - On an existing _fabric8 karaf_ container using the `fabric:container-add-profile` command.
   Example: 
