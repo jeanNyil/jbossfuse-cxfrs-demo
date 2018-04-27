@@ -29,11 +29,11 @@ are fetched from a JSON file. Below is an example in the JSON format:
 
 ## :warning: Attention:
 The **_[IpService CXFRS server](../ipservice_cxfrs_server)_** 
-will be called **ONLY IF** the input JSON file is valid according to the _[inputMessageSchema.json](src/main/resources/Schemas/inputMessageSchema.json)_.
+will be called **ONLY IF** the input JSON file is valid according to the _[inputMessageSchema.json](src/main/resources/Schemas/inputMessageSchema.json)_ JSON schema.
 
-The **_[Everit JSON validator library](https://github.com/everit-org/json-schema)_** is used for JSON validation.
+The **_[Everit JSON validator](https://github.com/everit-org/json-schema)_** library is used for JSON validation.
 
-## Deployment on a standalone instance of _Red Hat Fuse 6.3.0/Apache Karaf_ 
+## Deployment in a standalone instance of _Red Hat Fuse 6.3.0 on Apache Karaf_ 
 
 ### Assumptions
 - _Red Hat JBoss Fuse 6.3.0 Rollup 6 (v6.3.0.redhat-329) on Apache Karaf_ is installed and running in standalone mode
@@ -81,7 +81,7 @@ $ features:addurl mvn:org.jeannyil.fuse/ipservice_cxfrs_client/1.0.0-SNAPSHOT/xm
 $ features:install ipservice_cxfrs_client
 ``` 
 
-## Deployment in a _fabric8_ cluster of _Red Hat Fuse 6.3.0/Apache Karaf_ 
+## Deployment in a _fabric8_ cluster of _Red Hat Fuse 6.3.0 on Apache Karaf_ 
 
 ### Assumptions
 - A _fabric8_-managed cluster of _Red Hat JBoss Fuse 6.3.0 Rollup 6 (v6.3.0.redhat-329)_ is running
@@ -94,9 +94,9 @@ as a standalone instance outside the _fabric8_ cluster
 
 - Log into the _Red Hat Fuse Karaf_ terminal
 - Use the `fabric:profile-edit` command (example: `fabric:profile-edit -p org.jeannyil.fuse.cxfrs.demo/broker.user.name=amq org-jeannyil-fuse-cxfrs-demo`) 
-to adapt _Persistent ID_ properties for the following _fabric8_ profiles:
-  - `org-jeannyil-fuse-cxfrs-demo` _fabric8_ profile`
-    - Update the following `org.jeannyil.fuse.cxfrs.demo` _Persistent ID_ properties: 
+to adapt some _Persistent ID_ properties as indicated for the following _fabric8_ profiles:
+  - `org-jeannyil-fuse-cxfrs-demo` _fabric8_ profile
+    - Adapt these `org.jeannyil.fuse.cxfrs.demo` _Persistent ID_ properties: 
       - `amqclient.ssl.truststore`: path to the truststore containing the AMQ broker public certificate
       - `amqclient.ssl.truststore.password`: password of the truststore
       - `broker.out.url`: _Red Hat JBoss AMQ_ broker connection url (openwire)
@@ -120,7 +120,7 @@ to adapt _Persistent ID_ properties for the following _fabric8_ profiles:
     [...]
     ```
   - `org-jeannyil-fuse-cxfrs-demo-ipservice_cxfrs_client` _fabric8_ profile
-    - Update the following `org.jeannyil.fuse.demo.ipservicecxfrsclient` _Persistent ID_ properties:
+    - Adapt these `org.jeannyil.fuse.demo.ipservicecxfrsclient` _Persistent ID_ properties:
       - `json.file.input.path` and `json.file.error.path`: working directories (respectively input and error) for the `ipservice_cxfrs_client` bundle 
       - `restful.service.base.url`: base URL of the the **[ipservice_cxfrs_server](../ipservice_cxfrs_server_swaggerv2)** RESTful service
       - `restful.service.ssl.truststore`: path to the truststore containing the **[ipservice_cxfrs_server](../ipservice_cxfrs_server_swaggerv2)** RESTful service public certificate
