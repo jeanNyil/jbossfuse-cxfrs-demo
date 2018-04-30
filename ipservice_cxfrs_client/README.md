@@ -1,6 +1,5 @@
 # Camel CXFRS Demo :: A Red Hat JBoss Fuse 6.3.0 RESTful client for the IPSERVICE CXFRS Server exposed behind an SSL-enabled fabric8 gateway
-- This project can be deployed both in a Red Hat JBoss Fuse 6.3.0 standalone karaf container or in a Fabric8 environment. 
-The features repository for a standalone deployment in a karaf container works fine.
+- This project can be deployed both in a _Red Hat JBoss Fuse 6.3.0_ standalone _karaf_ container or in a _Fabric8_-managed cluster environment. 
 
 - The request parameters to call the **_[IpService CXFRS server](../ipservice_cxfrs_server)_** 
 are fetched from a JSON file. Below is an example in the JSON format:

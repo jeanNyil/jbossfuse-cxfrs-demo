@@ -1,12 +1,12 @@
 # jbossfuse-cxfrs-demo
-Red Hat JBoss Fuse 6.3.0 projects to demo the usage of the camel CXFRS endpoints in order to expose or consume RESTful services running on Apache KARAF containers (RH JBoss Fuse standalone or in a Fabric8 environment)
+_Red Hat JBoss Fuse 6.3.0_ projects to demo the usage of the camel CXFRS endpoints in order to expose or consume RESTful services running on _Apache Karaf_ containers (standalone or _Fabric8_-managed cluster)
 * [ipservice\_cxfrs\_server\_swaggerv1](ipservice_cxfrs_server_swaggerv1) (`swagger v1.2`)
 * [ipservice\_cxfrs\_server\_swaggerv2](ipservice_cxfrs_server_swaggerv2) (`swagger v2.0`)
 * [ipservice\_cxfrs\_client](ipservice_cxfrs_client)
 
 ## :warning: WARNING:
 - The *__Red Hat JBoss Fuse 6.3.0 Rollup 6 (v6.3.0.redhat-329) BOM__* is used in this project. So make sure you use the same patch version or
-  adapt to your current patch version of Red Hat JBoss Fuse 6.3.0
+  adapt to your current patch version of _Red Hat JBoss Fuse 6.3.0_
 - This project is configured to use a repository manager. 
 Thus, the [parent POM](pom.xml) points to my private [Sonatype Nexus Repository OSS](https://www.sonatype.com/download-oss-sonatype).
 My [Sonatype Nexus Repository OSS](https://www.sonatype.com/download-oss-sonatype) is configured to proxy the following 
@@ -28,7 +28,7 @@ tests according to the tested module:
 
 All three modules can be built from the parent project (_[jbossfuse-cxfrs-demo](../jbossfuse-cxfrs-demo)_).
 
-Please follow the instructions below according to the target deployment type: standalone or in a _fabric8_ cluster
+Please follow the instructions below according to the target deployment type: standalone or in a _fabric8_-managed cluster
 
 ### Build for a standalone deployment
 
@@ -73,8 +73,8 @@ Deployment and test instructions for each module can be found in its _README_ ac
 
 ## Screenshot samples
 
-### Red Hat JBoss Fuse 6.3.0 on Apache Karaf standalone deployment 
+### Deployment on a standalone instance of _Red Hat JBoss Fuse 6.3.0 on Apache Karaf_ 
 ![Fuse on Apache Karaf Standalone Deployment](images/Fuse_Standalone_Deployment.png)
 
-### Red Hat JBoss Fuse 6.3.0 on Apache Karaf deployment as a fabric8 cluster
+### Deployment in a _Fabric8_-managed  _Red Hat JBoss Fuse 6.3.0_ cluster environment
 ![Fuse on Apache Karaf Fabric Cluster Deployment](images/Fuse_Fabric8_Deployment.png)
