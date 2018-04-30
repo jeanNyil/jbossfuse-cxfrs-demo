@@ -80,7 +80,7 @@ $ features:addurl mvn:org.jeannyil.fuse/ipservice_cxfrs_client/1.0.0-SNAPSHOT/xm
 $ features:install ipservice_cxfrs_client
 ``` 
 
-## Deployment in a _fabric8_ cluster of _Red Hat Fuse 6.3.0 on Apache Karaf_ 
+## Deployment in a _fabric8_-managed  cluster of _Red Hat Fuse 6.3.0 on Apache Karaf_ 
 
 ### Assumptions
 - A _fabric8_-managed cluster of _Red Hat JBoss Fuse 6.3.0 Rollup 6 (v6.3.0.redhat-329)_ is running
@@ -91,7 +91,7 @@ as a standalone instance outside the _fabric8_ cluster
 
 ### Deployment instructions
 
-- Log into the _Red Hat Fuse Karaf_ terminal
+- Log into the _Red Hat Fuse fabric8_ terminal
 - Use the `fabric:profile-edit` command (example: `fabric:profile-edit -p org.jeannyil.fuse.cxfrs.demo/broker.user.name=amq org-jeannyil-fuse-cxfrs-demo`) 
 to adapt some _Persistent ID_ properties as indicated for the following _fabric8_ profiles:
   - `org-jeannyil-fuse-cxfrs-demo` _fabric8_ profile
