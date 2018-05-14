@@ -5,16 +5,16 @@ This project can be deployed both in a _Red Hat JBoss Fuse 6.3.0_ standalone _ka
 ## Deployment on a standalone instance of _Red Hat Fuse 6.3.0/Apache Karaf_ 
 
 ### Assumptions
-- _Red Hat JBoss Fuse 6.3.0 Rollup 6 (v6.3.0.redhat-329) on Apache Karaf_ is installed and running in standalone mode
-- _Red Hat JBoss AMQ_ broker is either running inside in the _Red Hat JBoss Fuse 6.3.0 Rollup 6 (v6.3.0.redhat-329) on Apache Karaf_ (embedded) or
+- _Red Hat JBoss Fuse 6.3.0 Rollup 7 (v6.3.0.redhat-343) on Apache Karaf_ is installed and running in standalone mode
+- _Red Hat JBoss AMQ_ broker is either running inside in the _Red Hat JBoss Fuse 6.3.0 Rollup 7 (v6.3.0.redhat-343) on Apache Karaf_ (embedded) or
 is running as a standalone instance
 - The project has been [built for a standalone deployment](../README.md#build-for-a-standalone-deployment)
 
 ## Deployment in a standalone instance of _Red Hat Fuse 6.3.0 on Apache Karaf_ 
 
 ### Assumptions
-- _Red Hat JBoss Fuse 6.3.0 Rollup 6 (v6.3.0.redhat-329) on Apache Karaf_ is installed and running in standalone mode
-- _Red Hat JBoss AMQ_ broker is either running inside in the _Red Hat JBoss Fuse 6.3.0 Rollup 6 (v6.3.0.redhat-329) on Apache Karaf_ (embedded) or
+- _Red Hat JBoss Fuse 6.3.0 Rollup 7 (v6.3.0.redhat-343) on Apache Karaf_ is installed and running in standalone mode
+- _Red Hat JBoss AMQ_ broker is either running inside in the _Red Hat JBoss Fuse 6.3.0 Rollup 7 (v6.3.0.redhat-343) on Apache Karaf_ (embedded) or
 is running as a standalone instance
 - The project has been [built for a standalone deployment](../README.md#build-for-a-standalone-deployment)
 
@@ -52,8 +52,8 @@ $ features:install ipservice_cxfrs_server_swaggerv1
 ## Deployment in a _fabric8_-managed cluster of _Red Hat Fuse 6.3.0 on Apache Karaf_ 
 
 ### Assumptions
-- A _fabric8_-managed cluster of _Red Hat JBoss Fuse 6.3.0 Rollup 6 (v6.3.0.redhat-329)_ is running
-- _Red Hat JBoss AMQ_ broker is either running within the _fabric8_-managed cluster of _Red Hat JBoss Fuse 6.3.0 Rollup 6 (v6.3.0.redhat-329)_ or
+- A _fabric8_-managed cluster of _Red Hat JBoss Fuse 6.3.0 Rollup 7 (v6.3.0.redhat-343)_ is running
+- _Red Hat JBoss AMQ_ broker is either running within the _fabric8_-managed cluster of _Red Hat JBoss Fuse 6.3.0 Rollup 7 (v6.3.0.redhat-343)_ or
 as a standalone instance outside the _fabric8_ cluster
 - The project has been [built for a _Red Hat Fuse fabric8_-managed cluster deployment](../README.md#build-for-a-_fabric8_-managed-cluster-deployment)
 - All the generated _fabric8_ profiles have been imported (See instructions [here](../README.md#build-for-a-_fabric8_-managed-cluster-deployment))
