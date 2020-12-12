@@ -94,14 +94,15 @@
 							<goal>java2swagger</goal>
 						</goals>
 						<configuration>
-						<classResourceNames>
-							<classResourceName>org.jeannyil.fuse.demo.ipservice.server.resource.IpService</classResourceName>
-		              </classResourceNames>
-		              <attachSwagger>false</attachSwagger>
-		            </configuration>
-		          </execution>
+							<classResourceNames>
+								<classResourceName>org.jeannyil.fuse.demo.ipservice.server.resource.IpService</classResourceName>
+							</classResourceNames>
+							<attachSwagger>false</attachSwagger>
+						</configuration>
+		          	</execution>
 		        </executions>
-	      	</plugin>
+			</plugin>
+			  
 	      	<!-- Used for installing the features repository in MAVEN repo -->
 	      	<plugin>
 		        <groupId>org.codehaus.mojo</groupId>
