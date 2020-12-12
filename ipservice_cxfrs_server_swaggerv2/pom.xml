@@ -67,7 +67,6 @@
 		</dependency>
 	</dependencies>
 	
-	<!-- Configuration of the maven fabric-cxf-plugins for swagger -->
 	<build>
 		<!-- Resources -->
 		<resources>
@@ -81,7 +80,7 @@
 			</resource>
 		</resources>
 		<plugins>
-			<!-- maven fabric-cxf-plugins -->
+			<!-- Configuration of the maven fabric-cxf-plugins for swagger -->
 			<plugin>
 		        <groupId>io.fabric8</groupId>
 		        <artifactId>fabric-cxf-plugins</artifactId>

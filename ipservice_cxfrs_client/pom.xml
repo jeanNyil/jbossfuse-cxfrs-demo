@@ -56,7 +56,6 @@
         </dependency>
 	</dependencies>
 	
-	<!-- Configuration of the build-helper-maven-plugin  -->
 	<build>
 		<!-- Resources -->
 		<resources>
@@ -70,8 +69,8 @@
 			</resource>
 		</resources>
 		<plugins>
-			<!-- Attach the generated features file as an artifact,
-	             and publish to the maven repository -->
+			<!-- Configuration of the build-helper-maven-plugin.
+				 Attach the generated features file as an artifact, and publish to the maven repository -->
 			<plugin>
 		        <groupId>org.codehaus.mojo</groupId>
 		        <artifactId>build-helper-maven-plugin</artifactId>
