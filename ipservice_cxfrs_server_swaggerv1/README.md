@@ -27,8 +27,8 @@ context.name.application=demo-ipservice_cxfrs_server
 camel.name.route=demo-ipservicecxfrsserver-route
 notif.amq.destination=queue://IPSERVICE.CXFRSSERVER.NOTIF.QUEUE
 error.amq.destination=queue://IPSERVICE.CXFRSSERVER.ERROR.QUEUE
-amqclient.ssl.truststore=/home/jEAN/mnt/nfsshare/security/fuse-standalone.lab.com/jboss-fuse/app-truststore.jks
-amqclient.ssl.truststore.password=P@ssw0rd
+amqclient.ssl.truststore=/Users/jnyilimb/workdata/truststore/truststore.jks
+amqclient.ssl.truststore.password=secret
 broker.out.url=failover:(ssl://amq-standalone.lab.com:61443)?jms.useCompression=true
 broker.user.name=amq
 broker.user.password=amq@standalone
@@ -78,12 +78,12 @@ to adapt some _Persistent ID_ properties as indicated for the following _fabric8
     ----------------------------
     PID: org.jeannyil.fuse.cxfrs.demo
       broker.out.url discovery:(fabric://ssl-demo-broker)
-      amqclient.ssl.truststore /home/jEAN/mnt/nfsshare/security/jboss-fuse/truststore.jks
+      amqclient.ssl.truststore /Users/jnyilimb/workdata/truststore/truststore.jks
       broker.max.activesessionperconnection 500
       broker.max.connections 1
       broker.user.name amq
-      broker.user.password amq@fabric
-      amqclient.ssl.truststore.password P@ssw0rd
+      broker.user.password ${crypt:AXwoRz+nwJEtZtayqOprP8VFTxMJl5EZ}
+      amqclient.ssl.truststore.password ${crypt:/ynd1l0QTCcuaeJdcdAsrA==}
       output.message.ttl.inms 3600000
     [...]
     ```

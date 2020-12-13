@@ -27,8 +27,8 @@ context.name.application=demo-ipservice_cxfrs_server
 camel.name.route=demo-ipservicecxfrsserver-route
 notif.amq.destination=queue://IPSERVICE.CXFRSSERVER.NOTIF.QUEUE
 error.amq.destination=queue://IPSERVICE.CXFRSSERVER.ERROR.QUEUE
-amqclient.ssl.truststore=/home/jEAN/mnt/nfsshare/security/fuse-standalone.lab.com/jboss-fuse/app-truststore.jks
-amqclient.ssl.truststore.password=P@ssw0rd
+amqclient.ssl.truststore=/Users/jnyilimb/workdata/truststore/truststore.jks
+amqclient.ssl.truststore.password=secret
 broker.out.url=failover:(ssl://amq-standalone.lab.com:61443)?jms.useCompression=true
 broker.user.name=amq
 broker.user.password=amq@standalone
@@ -82,16 +82,16 @@ to adapt some _Persistent ID_ properties as indicated for the following _fabric8
     ----------------------------
     PID: org.jeannyil.fuse.cxfrs.demo
       broker.out.url discovery:(fabric://ssl-demo-broker)
-      amqclient.ssl.truststore /home/jEAN/mnt/nfsshare/security/jboss-fuse/truststore.jks
+      amqclient.ssl.truststore /Users/jnyilimb/workdata/truststore/truststore.jks
       broker.max.activesessionperconnection 500
       broker.max.connections 1
       broker.user.name amq
-      broker.user.password amq@fabric
-      amqclient.ssl.truststore.password P@ssw0rd
+      broker.user.password ${crypt:AXwoRz+nwJEtZtayqOprP8VFTxMJl5EZ}
+      amqclient.ssl.truststore.password ${crypt:/ynd1l0QTCcuaeJdcdAsrA==}
       output.message.ttl.inms 3600000
     [...]
     ```
-  - `org-jeannyil-fuse-cxfrs-demo-ipservice_cxfrs_server_swaggerv1` _fabric8_ profile
+  - `org-jeannyil-fuse-cxfrs-demo-ipservice_cxfrs_server_swaggerv2` _fabric8_ profile
     - Adapt these `org.jeannyil.fuse.demo.ipservicecxfrsserver` _Persistent ID_ properties:
       - `exposed.service.gateway.host` and `exposed.service.gateway.port`: these are respectively the host and port where the
       RESTful service is exposed. They are used for the service dynamically-generated `swagger v2.0` specification.
@@ -111,14 +111,14 @@ to adapt some _Persistent ID_ properties as indicated for the following _fabric8
       notif.amq.destination queue://IPSERVICE.CXFRSSERVER.NOTIF.QUEUE
       broker.user.password ${profile:org.jeannyil.fuse.cxfrs.demo/broker.user.password}
       amqclient.ssl.truststore.password ${profile:org.jeannyil.fuse.cxfrs.demo/amqclient.ssl.truststore.password}
+      exposed.service.gateway.host fuse-fabric8.lab.com
       amqclient.ssl.truststore ${profile:org.jeannyil.fuse.cxfrs.demo/amqclient.ssl.truststore}
       context.name.application demo-ipservice_cxfrs_server
       broker.user.name ${profile:org.jeannyil.fuse.cxfrs.demo/broker.user.name}
       http.client.connection.timeout.inms 60000
+      exposed.service.gateway.port 9000
       camel.name.route demo-ipservicecxfrsserver-route
-      output.message.ttl.inms ${profile:org.jeannyil.fuse.cxfrs.demo/output.message.ttl.inms}.inms}
-      exposed.service.gateway.host fuse-01.lab.com
-      exposed.service.gateway.port 9095
+      output.message.ttl.inms ${profile:org.jeannyil.fuse.cxfrs.demo/output.message.ttl.inms}
     [...]
     ```
 - Deploy the `org-jeannyil-fuse-cxfrs-demo-ipservice_cxfrs_server_swaggerv2`_fabric8_ profile:
