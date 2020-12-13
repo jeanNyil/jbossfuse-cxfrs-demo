@@ -7,7 +7,7 @@ import org.jeannyil.fuse.demo.ipservice.server.constants.ErrorTypesEnum;
 import org.jeannyil.fuse.demo.ipservice.server.constants.UtilHeadersEnum;
 import org.jeannyil.fuse.demo.ipservice.server.exception.TypeValidationException;
 
-public class IpServiceGeoLocationRoute extends RouteBuilder {
+public class IpServiceCheckRoute extends RouteBuilder {
 
     @Override
     public void configure() throws Exception {
@@ -41,18 +41,18 @@ public class IpServiceGeoLocationRoute extends RouteBuilder {
                 .process("prepareRestResponseProcessor");
 
         /**
-         *  Route that implements the getGeoLocation REST service operation.
+         *  Route that implements the checkRequesterLocation REST service operation.
          *  This route calls the remote Ipstack API and returns the raw response
          */
-        from("direct:getGeoLocation")
-                .routeId("{{camel.name.route}}-getGeoLocation")
-                .log(LoggingLevel.INFO, "Starting the getGeoLocation RESTful service operation...")
+        from("direct:checkRequesterLocation")
+                .routeId("{{camel.name.route}}-checkRequesterLocation")
+                .log(LoggingLevel.INFO, "Starting the checkRequesterLocation RESTful service operation...")
                 .process("validateRequestProcessor") // Validate input request
                 .setProperty("operationName", header("operationName"))
                 .removeHeaders("*") // Reset all the exchange message headers before proceeding
                 .process("ipstackAPIRequestProcessor")
                 .to("cxfrs:bean:ipstackApiRsClient")
                 .log(LoggingLevel.INFO, "Ipstack API Response:\n ${body}")
-                .log(LoggingLevel.INFO, "The getGeoLocation RESTful service operation is DONE");
+                .log(LoggingLevel.INFO, "The checkRequesterLocation RESTful service operation is DONE");
     }
 }

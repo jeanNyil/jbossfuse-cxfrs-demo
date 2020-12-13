@@ -12,20 +12,20 @@ public class IpServiceCxfRsServerMainRoute extends RouteBuilder {
 	public void configure() throws Exception {
 		// Error handling using Camel DefaultErrorHandler
 		onException(Exception.class)
-                .handled(true) // Suppressing exception rethrow to the caller
-                .logStackTrace(true)
-                .logExhausted(true)
-                .logHandled(true)
-                .setProperty(UtilHeadersEnum.ERRORTYPE.toString(), constant(ErrorTypesEnum.ALLOTHER_ERROR.toString()))
-                // Set the exception message and build the ErrorBean
-                .transform().simple("${exception.message}")
-                .process("buildErrorBeanProcessor")
-                // Transform the ErrorBean message to JSON format
-                .marshal().json(JsonLibrary.Jackson, true)
-                // Wire-tap the JSON message to AMQ broker destination
-                .wireTap("amq:{{error.amq.destination}}?timeToLive={{output.message.ttl.inms}}")
-                // Prepare and send an exception RESTful response to caller
-                .process("prepareRestResponseProcessor");
+				.handled(true) // Suppressing exception rethrow to the caller
+				.logStackTrace(true)
+				.logExhausted(true)
+				.logHandled(true)
+				.setProperty(UtilHeadersEnum.ERRORTYPE.toString(), constant(ErrorTypesEnum.ALLOTHER_ERROR.toString()))
+				// Set the exception message and build the ErrorBean
+				.transform().simple("${exception.message}")
+				.process("buildErrorBeanProcessor")
+				// Transform the ErrorBean message to JSON format
+				.marshal().json(JsonLibrary.Jackson, true)
+				// Wire-tap the JSON message to AMQ broker destination
+				.wireTap("amq:{{error.amq.destination}}?timeToLive={{output.message.ttl.inms}}")
+				// Prepare and send an exception RESTful response to caller
+				.process("prepareRestResponseProcessor");
 
 		/**
 		 *  Route that consumes the RESTful service requests and routes them to the appropriate
@@ -34,13 +34,13 @@ public class IpServiceCxfRsServerMainRoute extends RouteBuilder {
 		 *  instance before being transformed into a RESTful (JAX-RS) response through a camel processor.
 		 */
 		from("cxfrs:bean:ipRsService?bindingStyle=SimpleConsumer")
-				.routeId("{{camel.name.route}}-main")
-				.streamCaching() // Enable stream-caching
-				.log(LoggingLevel.INFO, "Received RESTful request - Headers: ${headers} \n body: ${body}")
-				.recipientList(simple("direct:${header.operationName}"))
-				.wireTap("amq:{{notif.amq.destination}}?timeToLive={{output.message.ttl.inms}}")
-				// Prepare successful RESTful response
-				.process("prepareRestResponseProcessor");
+			.routeId("{{camel.name.route}}-main")
+			.streamCaching() // Enable stream-caching
+			.log(LoggingLevel.INFO, "Received RESTful request - Headers: ${headers} \n body: ${body}")
+			.recipientList(simple("direct:${header.operationName}"))
+			.wireTap("amq:{{notif.amq.destination}}?timeToLive={{output.message.ttl.inms}}")
+			// Prepare successful RESTful response
+			.process("prepareRestResponseProcessor");
 	}
 
 }
