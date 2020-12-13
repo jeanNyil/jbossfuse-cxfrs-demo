@@ -52,17 +52,17 @@ Four _fabric8_ profiles are generated:
 
 In order to import these profiles in a _Red Hat Fuse fabric8_-managed cluster:
 - Log into the _Red Hat Fuse fabric8_ terminal and import the generated `org-jeannyil-fuse-cxfrs-demo` _fabric8_ parent profile:
-```
-$ fabric:profile-import mvn:org.jeannyil.fuse/cxfrs-demo/1.0.0-SNAPSHOT/zip/profile
-```
+  ```
+  $ fabric:profile-import mvn:org.jeannyil.fuse/cxfrs-demo/1.0.0-SNAPSHOT/zip/profile
+  ```
 - All the three modules _fabric8_ profiles will be automatically imported:
-```
-$ fabric:profile-list | grep jeannyil
-  org-jeannyil-fuse-cxfrs-demo                                                   default feature-camel feature-camel-jms feature-cxf
-  org-jeannyil-fuse-cxfrs-demo-ipservice_cxfrs_client                            org-jeannyil-fuse-cxfrs-demo
-  org-jeannyil-fuse-cxfrs-demo-ipservice_cxfrs_server_swaggerv1                  org-jeannyil-fuse-cxfrs-demo
-  org-jeannyil-fuse-cxfrs-demo-ipservice_cxfrs_server_swaggerv2                  org-jeannyil-fuse-cxfrs-demo
-```
+  ```
+  $ fabric:profile-list | grep jeannyil
+    org-jeannyil-fuse-cxfrs-demo                                                   default feature-camel feature-camel-jms feature-cxf
+    org-jeannyil-fuse-cxfrs-demo-ipservice_cxfrs_client                            org-jeannyil-fuse-cxfrs-demo
+    org-jeannyil-fuse-cxfrs-demo-ipservice_cxfrs_server_swaggerv1                  org-jeannyil-fuse-cxfrs-demo
+    org-jeannyil-fuse-cxfrs-demo-ipservice_cxfrs_server_swaggerv2                  org-jeannyil-fuse-cxfrs-demo
+  ```
 
 ## Deployment and test instructions
 
