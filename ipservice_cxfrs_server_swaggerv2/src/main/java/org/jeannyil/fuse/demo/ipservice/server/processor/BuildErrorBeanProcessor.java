@@ -22,8 +22,8 @@ public class BuildErrorBeanProcessor implements Processor {
 		
 		// Input parameters map
 		Map<String,String> inputParameters = new TreeMap<String,String>();
-		inputParameters.put(GeoLocationParametersEnum.TYPE.toString(),
-							exchange.getProperty(GeoLocationParametersEnum.TYPE.toString(), String.class));
+		inputParameters.put(GeoLocationParametersEnum.OUTPUT.toString(),
+							exchange.getProperty(GeoLocationParametersEnum.OUTPUT.toString(), String.class));
 		inputParameters.put(GeoLocationParametersEnum.IP.toString(),
 							exchange.getProperty(GeoLocationParametersEnum.IP.toString(), String.class));
 		

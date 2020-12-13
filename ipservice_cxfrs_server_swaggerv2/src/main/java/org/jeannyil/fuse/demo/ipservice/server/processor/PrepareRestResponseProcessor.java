@@ -17,7 +17,7 @@ public class PrepareRestResponseProcessor  implements Processor {
 	public void process(Exchange exchange) throws Exception {
 		Message message = exchange.getIn();
         Response response = convertToJaxRs(message,
-				exchange.getProperty(GeoLocationParametersEnum.TYPE.toString(), String.class),
+				exchange.getProperty(GeoLocationParametersEnum.OUTPUT.toString(), String.class),
 				exchange.getProperty(UtilHeadersEnum.ERRORTYPE.toString(), String.class));
         exchange.getIn().setBody(response);
 	}

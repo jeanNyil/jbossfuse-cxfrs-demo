@@ -2,7 +2,7 @@ package org.jeannyil.fuse.demo.ipservice.server.constants;
 
 public enum GeoLocationParametersEnum {
 	IP("ip"),
-	TYPE("type");
+	OUTPUT("output");
 	
 	private String inputParameter;
 	

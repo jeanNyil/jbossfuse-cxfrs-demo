@@ -45,18 +45,18 @@
             <cm:property name="camel.name.route" value="demo-ipservicecxfrsserver-route"/>
             <cm:property name="notif.amq.destination" value="queue://IPSERVICE.CXFRSSERVER.NOTIF.QUEUE"/>
             <cm:property name="error.amq.destination" value="queue://IPSERVICE.CXFRSSERVER.ERROR.QUEUE"/>
-            <cm:property name="amqclient.ssl.truststore" value="/Users/jnyilimb/workspace/security/fuse/app-truststore.jks"/>
-            <cm:property name="amqclient.ssl.truststore.password" value="P@ssw0rd"/>
-            <cm:property name="broker.out.url" value="failover:(ssl://amq-standalone.lab.com:61616)?jms.useCompression=true"/>
-            <cm:property name="broker.user.name" value="amq"/>
-            <cm:property name="broker.user.password" value="amq@fabric"/>
+            <cm:property name="amqclient.ssl.truststore" value="/Users/jnyilimb/workdata/truststore/truststore.jks"/>
+            <cm:property name="amqclient.ssl.truststore.password" value="secret"/>
+            <cm:property name="broker.out.url" value="failover:(ssl://amq-ssl-broker-all-0-svc-rte-amq7-broker-cluster.apps.cluster-3f60.sandbox256.opentlc.com)?jms.useCompression=true"/>
+            <cm:property name="broker.user.name" value="amq-user"/>
+            <cm:property name="broker.user.password" value="P@ssw0rd"/>
             <cm:property name="broker.max.connections" value="1"/>
             <cm:property name="broker.max.activesessionperconnection" value="500"/>
             <cm:property name="output.message.ttl.inms" value="300000"/>
-            <cm:property name="exposed.service.gateway.host" value="fuse-standalone.lab.com"/>
-            <cm:property name="exposed.service.gateway.port" value="8443"/>
-            <cm:property name="restful.service.ssl.truststore" value="/Users/jnyilimb/workspace/security/fuse/truststore.jks"/>
-            <cm:property name="restful.service.ssl.truststore.password" value="P@ssw0rd"/>
+            <cm:property name="exposed.service.gateway.host" value="localhost"/>
+            <cm:property name="exposed.service.gateway.port" value="9000"/>
+            <cm:property name="restful.service.ssl.truststore" value="/Users/jnyilimb/workdata/truststore/truststore.jks"/>
+            <cm:property name="restful.service.ssl.truststore.password" value="secret"/>
         </cm:default-properties>
     </cm:property-placeholder>
     <!--  ActiveMQ component with an SSL-secured pooledConnection factory -->
@@ -83,7 +83,7 @@
     <bean
     		class="org.jeannyil.fuse.demo.ipservice.server.processor.BuildErrorBeanProcessor" id="buildErrorBeanProcessor"/>
     <bean
-        class="org.jeannyil.fuse.demo.ipservice.server.processor.FreeGeoIpRequestProcessor" id="freeGeoIpRequestProcessor"/>
+        class="org.jeannyil.fuse.demo.ipservice.server.processor.IpstackAPIRequestProcessor" id="ipstackAPIRequestProcessor"/>
     <bean
     		class="org.jeannyil.fuse.demo.ipservice.server.processor.PrepareRestResponseProcessor" id="prepareRestResponseProcessor"/>
     <bean 
@@ -92,18 +92,21 @@
     <bean
             class="org.jeannyil.fuse.demo.ipservice.server.route.IpServiceCxfRsServerMainRoute" id="ipServiceCxfRsServerMainRoute"/>
     <bean
+            class="org.jeannyil.fuse.demo.ipservice.server.route.IpServiceCheckRoute" id="ipServiceCheckRoute"/>
+    <bean
             class="org.jeannyil.fuse.demo.ipservice.server.route.IpServiceGeoLocationRoute" id="ipServiceGeoLocationRoute"/>
 
     <!-- Camel context -->
     <camelContext allowUseOriginalMessage="false" streamCache="true"
         id="ipservice-cxfrsserver-context" xmlns="http://camel.apache.org/schema/blueprint">
         <routeBuilder ref="ipServiceCxfRsServerMainRoute"/>
+        <routeBuilder ref="ipServiceCheckRoute"/>
         <routeBuilder ref="ipServiceGeoLocationRoute"/>
     </camelContext>
 
     <!--  CxfRs endpoints -->
-    <cxf:rsClient id="freeGeoIpRsClient" address="http://freegeoip.net/"
-         serviceClass="org.jeannyil.fuse.demo.ipservice.server.endpoint.FreeGeoIp"
+    <cxf:rsClient id="ipstackApiRsClient" address="http://api.ipstack.com"
+         serviceClass="org.jeannyil.fuse.demo.ipservice.server.endpoint.IpstackAPI"
          loggingFeatureEnabled="true">
         <cxf:providers>
             <bean id="clientJsonProvider" class="com.fasterxml.jackson.jaxrs.json.JacksonJsonProvider"/>
@@ -115,7 +118,7 @@
         <cxf:providers>
             <bean id="serverJsonProvider" class="com.fasterxml.jackson.jaxrs.json.JacksonJsonProvider"/>
         </cxf:providers>
-        <!-- Enable Swagger -->
+        <!-- Enable Swagger 2.0 -->
         <cxf:features>
             <bean class="org.apache.cxf.jaxrs.swagger.Swagger2Feature">
                 <property name="runAsFilter" value="true" />
