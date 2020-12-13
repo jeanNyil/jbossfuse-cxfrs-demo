@@ -6,7 +6,7 @@ import javax.ws.rs.core.MediaType;
 @Path(value="/ipservice")
 public interface IpService {
 	@GET
-	@Path("/geolocation")
+	@Path(value="/geolocation")
 	@Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
-	public String getGeoLocation(@QueryParam("type") String type, @QueryParam("ip") String ip);
+	public String getGeoLocation(@QueryParam("ip") String ip, @QueryParam("output") String output);
 }

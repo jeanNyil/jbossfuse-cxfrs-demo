@@ -1,7 +1,7 @@
 {
   "parameters": [
     {
-      "ip_or_hostname": "",
+      "ip_or_hostname": "google.com",
       "response_type": "xml"
     },
     {

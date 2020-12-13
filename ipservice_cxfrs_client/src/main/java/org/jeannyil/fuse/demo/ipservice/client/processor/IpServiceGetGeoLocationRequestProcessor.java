@@ -20,11 +20,11 @@ public class IpServiceGetGeoLocationRequestProcessor implements Processor {
         //creating the request
         LinkedHashMap<String,String> parameters = (LinkedHashMap<String, String>) inMessage.getBody();
         String ipOrHostname = parameters.getOrDefault(IpServiceInputParametersEnum.IP.toString(), "");
-        String expectedResponseFormat = parameters.getOrDefault(IpServiceInputParametersEnum.TYPE.toString(),"json");
+        String expectedResponseFormat = parameters.getOrDefault(IpServiceInputParametersEnum.OUTPUT.toString(),"json");
         	
         MessageContentsList req = new MessageContentsList();
-        req.add(expectedResponseFormat);
         req.add(ipOrHostname);
+        req.add(expectedResponseFormat);
         
         // set the operation name
         inMessage.setHeader(CxfConstants.OPERATION_NAME, "getGeoLocation");
