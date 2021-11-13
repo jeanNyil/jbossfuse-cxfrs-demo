@@ -98,7 +98,7 @@
         class="org.jeannyil.fuse.demo.ipservice.client.route.IpServiceCxfRsClientRoute" id="ipServiceCxfRsClientRoute"/>
 
     <!-- Camel context -->
-    <camelContext allowUseOriginalMessage="false" streamCache="true"
+    <camelContext allowUseOriginalMessage="false" streamCache="true" useBreadcrumb="true" useMDCLogging="true"
         id="ipservice-cxfrsclient-context" xmlns="http://camel.apache.org/schema/blueprint">
         <routeBuilder ref="ipServiceCxfRsClientRoute"/>
     </camelContext>
