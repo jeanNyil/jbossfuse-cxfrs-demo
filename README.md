@@ -2,6 +2,7 @@
 _Red Hat JBoss Fuse 6.3.0_ projects to demo the usage of the camel CXFRS endpoints in order to expose or consume RESTful services running on _Apache Karaf_ containers (standalone or _Fabric8_-managed cluster)
 * [ipservice\_cxfrs\_server\_swaggerv1](ipservice_cxfrs_server_swaggerv1) (`swagger v1.2`)
 * [ipservice\_cxfrs\_server\_swaggerv2](ipservice_cxfrs_server_swaggerv2) (`swagger v2.0`)
+* [oidcsecured\_ipservice\_cxfrs\_server\_swaggerv2](oidcsecured_ipservice_cxfrs_server_swaggerv2) (`swagger v2.0` and secured with OpenID Connect protocol)
 * [ipservice\_cxfrs\_client](ipservice_cxfrs_client)
 
 ## :warning: WARNING:
@@ -22,11 +23,12 @@ the two Red Hat maven repositories above.
 tests according to the tested module:
     - [ipservice\_cxfrs\_server\_swaggerv1 PID](ipservice_cxfrs_server_swaggerv1/src/main/fabric8/org.jeannyil.fuse.demo.ipservicecxfrsserver.properties)
     - [ipservice\_cxfrs\_server\_swaggerv2 PID](ipservice_cxfrs_server_swaggerv2/src/main/fabric8/org.jeannyil.fuse.demo.ipservicecxfrsserver.properties)
-    - [ipservice\_cxfrs\_client PID](ipservice_cxfrs_client/src/main/fabric8/org.jeannyil.fuse.demo.ipservicecxfrsclient.properties)
+    - [oidcsecured\_ipservice\_cxfrs\_server\_swaggerv2 PID](oidcsecured_ipservice_cxfrs_server_swaggerv2/src/main/fabric8/org.jeannyil.fuse.demo.oidcsecured.ipservicecxfrsserver.properties)
+    - [ipservice\_cxfrs\_client PID](ipservice_cxfrs_client/src/main/fabric8/org.jeannyil.fuse.demo.oidcsecured.ipservicecxfrsclient.properties)
 
 ## Build instructions
 
-All three modules can be built from the parent project (_[jbossfuse-cxfrs-demo](../jbossfuse-cxfrs-demo)_).
+All four modules can be built from the parent project (_[jbossfuse-cxfrs-demo](../jbossfuse-cxfrs-demo)_).
 
 Please follow the instructions below according to the target deployment type: standalone or in a _fabric8_-managed cluster
 
@@ -44,24 +46,26 @@ $ cd jbossfuse-cxfrs-demo
 $ mvn clean package fabric8:zip install
 ```
 
-Four _fabric8_ profiles are generated:
+Five _fabric8_ profiles are generated:
 - `org-jeannyil-fuse-cxfrs-demo`: the _fabric8_ parent profile for all the modules
 - `org-jeannyil-fuse-cxfrs-demo-ipservice_cxfrs_client`: the [ipservice\_cxfrs\_client](ipservice_cxfrs_client) module _fabric8_ profile
 - `org-jeannyil-fuse-cxfrs-demo-ipservice_cxfrs_server_swaggerv1`: the [ipservice\_cxfrs\_server\_swaggerv1](ipservice_cxfrs_server_swaggerv1) _fabric8_ profile
 - `org-jeannyil-fuse-cxfrs-demo-ipservice_cxfrs_server_swaggerv2`: the [ipservice\_cxfrs\_server\_swaggerv2](ipservice_cxfrs_server_swaggerv2) _fabric8_ profile
+- `org-jeannyil-fuse-cxfrs-demo-oidcsecured_ipservice_cxfrs_server_swaggerv2`: the [oidcsecured\_ipservice\_cxfrs\_server\_swaggerv2](oidcsecured_ipservice_cxfrs_server_swaggerv2) _fabric8_ profile
 
 In order to import these profiles in a _Red Hat Fuse fabric8_-managed cluster:
 - Log into the _Red Hat Fuse fabric8_ terminal and import the generated `org-jeannyil-fuse-cxfrs-demo` _fabric8_ parent profile:
   ```
   $ fabric:profile-import mvn:org.jeannyil.fuse/cxfrs-demo/1.0.0-SNAPSHOT/zip/profile
   ```
-- All the three modules _fabric8_ profiles will be automatically imported:
+- All the four modules _fabric8_ profiles will be automatically imported:
   ```
   $ fabric:profile-list | grep jeannyil
     org-jeannyil-fuse-cxfrs-demo                                                   default feature-camel feature-camel-jms feature-cxf
     org-jeannyil-fuse-cxfrs-demo-ipservice_cxfrs_client                            org-jeannyil-fuse-cxfrs-demo
     org-jeannyil-fuse-cxfrs-demo-ipservice_cxfrs_server_swaggerv1                  org-jeannyil-fuse-cxfrs-demo
     org-jeannyil-fuse-cxfrs-demo-ipservice_cxfrs_server_swaggerv2                  org-jeannyil-fuse-cxfrs-demo
+    org-jeannyil-fuse-cxfrs-demo-oidcsecured_ipservice_cxfrs_server_swaggerv2      org-jeannyil-fuse-cxfrs-demo
   ```
 
 ## Deployment and test instructions
@@ -69,6 +73,7 @@ In order to import these profiles in a _Red Hat Fuse fabric8_-managed cluster:
 Deployment and test instructions for each module can be found in its _README_ accordingly:
 - [ipservice\_cxfrs\_server\_swaggerv1](ipservice_cxfrs_server_swaggerv1/README.md)
 - [ipservice\_cxfrs\_server\_swaggerv2](ipservice_cxfrs_server_swaggerv2/README.md)
+- [oidcsecured\_ipservice\_cxfrs\_server\_swaggerv2](oidcsecured_ipservice_cxfrs_server_swaggerv2/README.md)
 - [ipservice\_cxfrs\_client](ipservice_cxfrs_client/README.md)
 
 ## Screenshot samples
