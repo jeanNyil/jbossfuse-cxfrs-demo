@@ -46,10 +46,11 @@ public class IpServiceCheckRoute extends RouteBuilder {
          */
         from("direct:checkRequesterLocation")
                 .routeId("{{camel.name.route}}-checkRequesterLocation")
+                .log(LoggingLevel.INFO, "headers: ${headers}")
                 .log(LoggingLevel.INFO, "Starting the checkRequesterLocation RESTful service operation...")
                 .process("validateRequestProcessor") // Validate input request
                 .setProperty("operationName", header("operationName"))
-                .removeHeaders("*") // Reset all the exchange message headers before proceeding
+                .removeHeaders("*", "breadCrumbId") // Reset all the exchange message headers before proceeding
                 .process("ipstackAPIRequestProcessor")
                 .to("cxfrs:bean:ipstackApiRsClient")
                 .log(LoggingLevel.INFO, "Ipstack API Response:\n ${body}")
