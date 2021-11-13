@@ -19,7 +19,7 @@ public class IpServiceCxfRsClientRoute extends RouteBuilder {
                         .log(LoggingLevel.ERROR, "The content of [${file:name}] file is NOT VALID JSON: ${exception}")
                         // Send the error message to the JBoss A-MQ broker destination
                         .transform(simple("The content of [${file:name}] file is NOT VALID JSON: ${exception}"))
-                                .removeHeaders("*")
+                                .removeHeaders("*", "breadcrumbId") // Reset all the exchange message headers (except breadcrumbId) before proceeding
                         .setHeader("ProcessedFile", exchangeProperty("ProcessedFile"))
                         .to(ExchangePattern.InOnly,"amq:{{error.amq.destination}}?timeToLive={{output.message.ttl.inms}}");
                 onException(Exception.class)
@@ -29,7 +29,7 @@ public class IpServiceCxfRsClientRoute extends RouteBuilder {
                         .logHandled(true)
                         // Send the error message to the JBoss A-MQ broker destination
                         .transform(simple("Unexpected exception while processing [${exchangeProperty.ProcessedFile}]: ${exception.stacktrace}"))
-                                        .removeHeaders("*")
+                                        .removeHeaders("*", "breadcrumbId") // Reset all the exchange message headers (except breadcrumbId) before proceeding
                         .setHeader(JMSPropertiesEnum.PROCESSEDFILE.toString(),
                                 exchangeProperty(JMSPropertiesEnum.PROCESSEDFILE.toString()))
                         .setHeader(JMSPropertiesEnum.PROCESSEDPARAMETERS.toString(),
@@ -74,14 +74,14 @@ public class IpServiceCxfRsClientRoute extends RouteBuilder {
                         .split().jsonpath("$..parameters.*").streaming()
                                 .log(LoggingLevel.INFO, "Split #${header.CamelSplitIndex} parameters: ${body}")
                                 .setProperty(JMSPropertiesEnum.PROCESSEDPARAMETERS.toString(), bodyAs(String.class))
-                                .removeHeaders("*") // Reset all the exchange message headers before proceeding
+                                .removeHeaders("*", "breadcrumbId") // Reset all the exchange message headers (except breadcrumbId) before proceeding
                                 // Prepare IP Geolocation RESTful service request
                                 .process("ipServiceGetGeoLocationRequestProcessor")
                                 .log(LoggingLevel.INFO, "Calling the IP Service getGeoLocation operation...")
                                 .to("cxfrs:bean:ipServiceRsClient")
                                 .log(LoggingLevel.INFO, "IP Service getGeoLocation operation response : ${body}")
                                 // Send the response to a JBoss A-MQ broker destination
-                                .removeHeaders("*")
+                                .removeHeaders("*", "breadcrumbId") // Reset all the exchange message headers (except breadcrumbId) before proceeding
                                 .setHeader(JMSPropertiesEnum.PROCESSEDFILE.toString(),
                                         exchangeProperty(JMSPropertiesEnum.PROCESSEDFILE.toString()))
                                 .setHeader(JMSPropertiesEnum.PROCESSEDPARAMETERS.toString(),

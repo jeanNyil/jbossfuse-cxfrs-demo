@@ -49,7 +49,7 @@ public class IpServiceGeoLocationRoute extends RouteBuilder {
                 .log(LoggingLevel.INFO, "Starting the getGeoLocation RESTful service operation...")
                 .process("validateRequestProcessor") // Validate input request
                 .setProperty("operationName", header("operationName"))
-                .removeHeaders("*") // Reset all the exchange message headers before proceeding
+                .removeHeaders("*", "breadcrumbId") // Reset all the exchange message headers (except breadcrumbId) before proceeding
                 .process("ipstackAPIRequestProcessor")
                 .to("cxfrs:bean:ipstackApiRsClient")
                 .log(LoggingLevel.INFO, "Ipstack API Response:\n ${body}")

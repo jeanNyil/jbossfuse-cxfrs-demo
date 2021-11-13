@@ -50,7 +50,7 @@ public class IpServiceCheckRoute extends RouteBuilder {
                 .log(LoggingLevel.INFO, "Starting the checkRequesterLocation RESTful service operation...")
                 .process("validateRequestProcessor") // Validate input request
                 .setProperty("operationName", header("operationName"))
-                .removeHeaders("*", "breadCrumbId") // Reset all the exchange message headers before proceeding
+                .removeHeaders("*", "breadcrumbId") // Reset all the exchange message headers (except breadcrumbId) before proceeding
                 .process("ipstackAPIRequestProcessor")
                 .to("cxfrs:bean:ipstackApiRsClient")
                 .log(LoggingLevel.INFO, "Ipstack API Response:\n ${body}")
