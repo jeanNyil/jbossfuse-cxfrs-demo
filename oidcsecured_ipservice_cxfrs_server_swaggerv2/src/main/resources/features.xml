@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<features name="oidcsecured_ipservice_cxfrs_server_swaggerv2-${project.version}"
+          xmlns="http://karaf.apache.org/xmlns/features/v1.0.0">
+
+  <repository>mvn:org.apache.cxf.karaf/apache-cxf/${cxf.version}/xml/features</repository>
+  <repository>mvn:io.fabric8/fabric8-karaf/${fabric8.version}/xml/features</repository>
+  <repository>mvn:org.apache.camel.karaf/apache-camel/${camel.version}/xml/features</repository>
+  <repository>mvn:org.keycloak/keycloak-osgi-features/${keyclaok.version}/xml/features</repository>
+
+  <feature name="oidcsecured_ipservice_cxfrs_server_swaggerv2" version="${project.version}" resolver="(obr)">
+    <details>A Red Hat JBoss Fuse 6.3.0 RESTful service that handles operations on an IP address or a hostname</details>
+    <feature version="${fabric8.version}">fabric-cxf</feature>
+    <feature version="${fabric8.version}">fabric-cxf-registry</feature>
+    <feature version="${fabric8.version}">activemq-camel</feature>
+    <feature version="${camel.version}">camel-jackson</feature>
+    <feature version="${keyclaok.version}">keycloak</feature>
+    <feature version="${keyclaok.version}">keycloak-jetty9-adapter</feature>
+    <bundle>mvn:org.jeannyil.fuse/oidcsecured_ipservice_cxfrs_server_swaggerv2/${project.version}</bundle>
+  </feature>
+
+</features>
