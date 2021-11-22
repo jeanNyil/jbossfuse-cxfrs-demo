@@ -33,6 +33,7 @@
 		<cxf.version>3.1.5.redhat-630495</cxf.version>
 		<fabric8.version>1.2.0.redhat-630495</fabric8.version>
 		<java.version>1.8</java.version>
+		<keyclaok.version>15.0.2.redhat-00001</keyclaok.version>
 		<!-- fabric8 properties -->
 	    <fabric8.parentProfiles>default feature-camel feature-camel-jms feature-cxf</fabric8.parentProfiles>
 		<fabric8.useResolver>false</fabric8.useResolver>
@@ -43,13 +44,21 @@
 		<fabric8.features>camel-amq camel-cxf cxf-commands camel-jackson</fabric8.features>
   	</properties>
 
-  	<!--  JBoss Fuse BOM -->
   	<dependencyManagement>
 		<dependencies>
+			<!--  JBoss Fuse BOM -->
 			<dependency>
 				<groupId>org.jboss.fuse.bom</groupId>
 				<artifactId>jboss-fuse-parent</artifactId>
 				<version>${jboss.fuse.bom.version}</version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>
+			<!-- Keycloak BOM -->
+			<dependency>
+				<groupId>org.keycloak.bom</groupId>
+				<artifactId>keycloak-adapter-bom</artifactId>
+				<version>${keyclaok.version}</version>
 				<type>pom</type>
 				<scope>import</scope>
 			</dependency>
@@ -323,6 +332,7 @@
 	<modules>
 		<module>ipservice_cxfrs_server_swaggerv1</module>
 		<module>ipservice_cxfrs_server_swaggerv2</module>
+		<module>oidcsecured_ipservice_cxfrs_server_swaggerv2</module>
 		<module>ipservice_cxfrs_client</module>
 	</modules>
 
