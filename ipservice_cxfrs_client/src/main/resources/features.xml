@@ -23,6 +23,7 @@
 
     <!-- Everit JSON schema validator dependencies/bundles -->
     <feature name="everit-jsonschema-validator" resolver="(obr)" version="${project.version}">
+        <details>Everit JSON schema validator dependencies/bundles</details>
         <bundle>mvn:org.everit.json/org.everit.json.schema/1.5.1</bundle>
         <bundle>mvn:org.json/json/20160810</bundle>
         <bundle>mvn:com.google.guava/guava/19.0</bundle>
@@ -31,6 +32,7 @@
     </feature>
     <!-- ipservice_cxfrs_client dependencies/bundles -->
     <feature name="ipservice_cxfrs_client" version="${project.version}" resolver="(obr)">
+        <details>A Red Hat JBoss Fuse 6.3.0 RESTful client for the IPSERVICE CXFRS Server exposed behind an SSL-enabled fabric8 gateway</details>
         <feature version="${project.version}">everit-jsonschema-validator</feature>
         <feature version="${fabric8.version}">fabric-cxf</feature>
         <feature version="${fabric8.version}">activemq-camel</feature>

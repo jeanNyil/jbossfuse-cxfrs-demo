@@ -7,11 +7,12 @@
   <repository>mvn:org.apache.camel.karaf/apache-camel/${camel.version}/xml/features</repository>
 
   <feature name="ipservice_cxfrs_server_swaggerv2" version="${project.version}" resolver="(obr)">
-      <feature version="${fabric8.version}">fabric-cxf</feature>
-      <feature version="${fabric8.version}">fabric-cxf-registry</feature>
-      <feature version="${fabric8.version}">activemq-camel</feature>
-      <feature version="${camel.version}">camel-jackson</feature>
-      <bundle>mvn:org.jeannyil.fuse/ipservice_cxfrs_server_swaggerv2/${project.version}</bundle>
+    <details>A Red Hat JBoss Fuse 6.3.0 RESTful service that handles operations on an IP address or a hostname</details>
+    <feature version="${fabric8.version}">fabric-cxf</feature>
+    <feature version="${fabric8.version}">fabric-cxf-registry</feature>
+    <feature version="${fabric8.version}">activemq-camel</feature>
+    <feature version="${camel.version}">camel-jackson</feature>
+    <bundle>mvn:org.jeannyil.fuse/ipservice_cxfrs_server_swaggerv2/${project.version}</bundle>
   </feature>
 
 </features>
