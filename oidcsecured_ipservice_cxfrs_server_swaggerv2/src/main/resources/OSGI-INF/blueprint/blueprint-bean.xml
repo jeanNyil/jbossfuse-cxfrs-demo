@@ -55,7 +55,7 @@
             <cm:property name="exposed.service.gateway.port" value="9000"/>
             <cm:property name="keycloak.adapter.realm" value="fuse-fabric-demo"/>
             <cm:property name="keycloak.adapter.authServerUrl" value="https://sso.apps.cluster-phxmk.phxmk.sandbox911.opentlc.com/auth"/>
-            <cm:property name="keycloak.adapter.sslRequired" value="ALL"/>
+            <cm:property name="keycloak.adapter.sslRequired" value="EXTERNAL"/>
             <cm:property name="keycloak.adapter.useResourceRoleMappings" value="true"/>
             <cm:property name="keycloak.adapter.verifyTokenAudience" value="true"/>
         </cm:default-properties>
@@ -75,7 +75,7 @@
     <bean id="keycloakAuthenticator" class="org.keycloak.adapters.jetty.KeycloakJettyAuthenticator">
         <property name="adapterConfig" ref="kcAdapterConfig"/>
     </bean>
-    <bean id="constraintUser" class="org.eclipse.jetty.util.security.Constraint">
+    <bean id="constraintUsers" class="org.eclipse.jetty.util.security.Constraint">
         <property name="name" value="users"/>
         <property name="roles">
             <list>
@@ -85,30 +85,15 @@
         <property name="authenticate" value="true"/>
         <property name="dataConstraint" value="0"/>
     </bean>
-    <bean id="constraintAdmin" class="org.eclipse.jetty.util.security.Constraint">
-        <property name="name" value="admins"/>
-        <property name="roles">
-            <list>
-                <value>admin</value>
-            </list>
-        </property>
-        <property name="authenticate" value="true"/>
-        <property name="dataConstraint" value="0"/>
-    </bean>
-    <bean id="constraintMappingUser" class="org.eclipse.jetty.security.ConstraintMapping">
-        <property name="constraint" ref="constraintUser"/>
-        <property name="pathSpec" value="/cxf/demorest/ipservice/check"/>
-    </bean>
-    <bean id="constraintMappingAdmin" class="org.eclipse.jetty.security.ConstraintMapping">
-        <property name="constraint" ref="constraintAdmin"/>
+    <bean id="constraintMappingUsers" class="org.eclipse.jetty.security.ConstraintMapping">
+        <property name="constraint" ref="constraintUsers"/>
         <property name="pathSpec" value="/*"/>
     </bean>
     <bean id="securityHandler" class="org.eclipse.jetty.security.ConstraintSecurityHandler">
         <property name="authenticator" ref="keycloakAuthenticator" />
         <property name="constraintMappings">
             <list>
-                <ref component-id="constraintMappingUser" />
-                <ref component-id="constraintMappingAdmin" />
+                <ref component-id="constraintMappingUsers" />
             </list>
         </property>
         <property name="authMethod" value="BASIC"/>
@@ -116,8 +101,8 @@
     </bean>
     <bean id="server" class="org.eclipse.jetty.server.Server"/> <!-- Avoid this error: Unable to load class org.eclipse.jetty.server.Connector -->
     <httpj:engine-factory bus="cxf" id="kc-cxf-endpoint">
-        <!-- <httpj:engine port="${port:8283,8284}"> -->
-        <httpj:engine port="8282">
+        <!-- <httpj:engine port="${port:8181,8282}"> -->
+        <httpj:engine port="8283">
             <httpj:handlers>
                 <ref component-id="securityHandler" />
             </httpj:handlers>
@@ -180,7 +165,7 @@
             <bean id="clientJsonProvider" class="com.fasterxml.jackson.jaxrs.json.JacksonJsonProvider"/>
         </cxf:providers>
     </cxf:rsClient>
-    <cxf:rsServer id="ipRsService" address="http://0.0.0.0:8282/cxf/demorest"
+    <cxf:rsServer id="ipRsService" address="http://0.0.0.0:8283/cxf/demorest"
     		 serviceClass="org.jeannyil.fuse.demo.ipservice.server.resource.IpService"
     		 loggingFeatureEnabled="true"
              depends-on="kc-cxf-endpoint">

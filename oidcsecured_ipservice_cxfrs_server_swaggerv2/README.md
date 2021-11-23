@@ -42,7 +42,7 @@ is running as a standalone instance
   http.client.receive.timeout.inms=120000
   keycloak.adapter.realm=fuse-fabric-demo
   keycloak.adapter.authServerUrl=https://sso.apps.cluster-phxmk.phxmk.sandbox911.opentlc.com/auth
-  keycloak.adapter.sslRequired=ALL
+  keycloak.adapter.sslRequired=EXTERNAL
   keycloak.adapter.verifyTokenAudience=true
   ```
 - Adapt the following properties according to your run-time environment:
