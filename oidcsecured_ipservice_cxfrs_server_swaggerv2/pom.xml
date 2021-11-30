@@ -25,7 +25,7 @@
 	<properties>
 		<!-- Fabric8 profile configuration -->
 		<fabric8.abstractProfile>false</fabric8.abstractProfile>
-		<fabric8.featureRepos>mvn:org.keycloak/keycloak-osgi-features/${keyclaok.version}/xml/features</fabric8.featureRepos>
+		<fabric8.featureRepos>mvn:org.keycloak/keycloak-osgi-features/${keycloak.version}/xml/features</fabric8.featureRepos>
 		<fabric8.features>swagger keycloak keycloak-jetty9-adapter</fabric8.features>
 		<fabric8.parentProfiles>org-jeannyil-fuse-cxfrs-demo</fabric8.parentProfiles>
 		<fabric8.profile>org-jeannyil-fuse-cxfrs-demo-oidcsecured_ipservice_cxfrs_server_swaggerv2</fabric8.profile>
@@ -66,7 +66,7 @@
 			<groupId>org.apache.cxf</groupId>
 			<artifactId>cxf-rt-rs-service-description</artifactId>
 		</dependency>
-		<!-- TODO: These are needed just for KeycloakConfigResolver. Remove if we move stuff to keycloak codebase itself 
+		<!-- TODO: These are needed just for KeycloakConfigResolver. Remove if we move stuff to keycloak codebase itself -->
         <dependency>
             <groupId>org.keycloak</groupId>
             <artifactId>keycloak-adapter-core</artifactId>
@@ -74,7 +74,7 @@
         <dependency>
             <groupId>org.keycloak</groupId>
             <artifactId>keycloak-adapter-spi</artifactId>
-        </dependency> -->
+        </dependency> 
 	</dependencies>
 	
 	<build>
@@ -134,7 +134,6 @@
 							org.eclipse.jetty.security;version="[9,10)",
 							org.eclipse.jetty.util.security;version="[9,10)",
 							org.keycloak.*;version="15.0.2.redhat-00001",
-							org.keycloak.adapters.jetty;version="15.0.2.redhat-00001",
 							javax.ws.rs;version="[2,3)",
 							javax.ws.rs.core;version="[2,3)",
 							javax.annotation;version="[1.1.0,2.0.0)",*
