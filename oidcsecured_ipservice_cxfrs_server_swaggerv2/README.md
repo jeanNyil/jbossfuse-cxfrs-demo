@@ -5,8 +5,8 @@ This project can be deployed both in a _Red Hat JBoss Fuse 6.3.0_ standalone _ka
 ## Deployment on a standalone instance of _Red Hat Fuse 6.3.0/Apache Karaf_ 
 
 ### Assumptions
-- _Red Hat JBoss Fuse 6.3.0 Rollup 18 (v6.3.0.redhat-495) on Apache Karaf_ is installed and running in standalone mode
-- _Red Hat JBoss AMQ_ broker is either running inside in the _Red Hat JBoss Fuse 6.3.0 Rollup 18 (v6.3.0.redhat-495) on Apache Karaf_ (embedded) or
+- _Red Hat JBoss Fuse 6.3.0 Rollup 19 (v6.3.0.redhat-515) on Apache Karaf_ is installed and running in standalone mode
+- _Red Hat JBoss AMQ_ broker is either running inside in the _Red Hat JBoss Fuse 6.3.0 Rollup 19 (v6.3.0.redhat-515) on Apache Karaf_ (embedded) or
 is running as a standalone instance
 - A _Red Hat Single Sign-On 7.5_ or _Keycloak 15_ instance is installed and running
 - The project has been [built for a standalone deployment](../README.md#build-for-a-standalone-deployment)
@@ -14,8 +14,8 @@ is running as a standalone instance
 ## Deployment in a standalone instance of _Red Hat Fuse 6.3.0 on Apache Karaf_ 
 
 ### Assumptions
-- _Red Hat JBoss Fuse 6.3.0 Rollup 18 (v6.3.0.redhat-495) on Apache Karaf_ is installed and running in standalone mode
-- _Red Hat JBoss AMQ_ broker is either running inside in the _Red Hat JBoss Fuse 6.3.0 Rollup 18 (v6.3.0.redhat-495) on Apache Karaf_ (embedded) or
+- _Red Hat JBoss Fuse 6.3.0 Rollup 19 (v6.3.0.redhat-515) on Apache Karaf_ is installed and running in standalone mode
+- _Red Hat JBoss AMQ_ broker is either running inside in the _Red Hat JBoss Fuse 6.3.0 Rollup 19 (v6.3.0.redhat-515) on Apache Karaf_ (embedded) or
 is running as a standalone instance
 - A _Red Hat Single Sign-On 7.5_ or _Keycloak 15_ instance is installed and running
 - The project has been [built for a standalone deployment](../README.md#build-for-a-standalone-deployment)
@@ -41,7 +41,7 @@ is running as a standalone instance
   http.client.connection.timeout.inms=60000
   http.client.receive.timeout.inms=120000
   keycloak.adapter.realm=fuse-fabric-demo
-  keycloak.adapter.authServerUrl=https://sso.apps.cluster-phxmk.phxmk.sandbox911.opentlc.com/auth
+  keycloak.adapter.authServerUrl=https://sso.apps.cluster-wz2fb.wz2fb.sandbox649.opentlc.com/auth
   keycloak.adapter.sslRequired=EXTERNAL
   keycloak.adapter.verifyTokenAudience=true
   ```
@@ -67,8 +67,8 @@ is running as a standalone instance
 ## Deployment in a _fabric8_-managed cluster of _Red Hat Fuse 6.3.0 on Apache Karaf_ 
 
 ### Assumptions
-- A _fabric8_-managed cluster of _Red Hat JBoss Fuse 6.3.0 Rollup 18 (v6.3.0.redhat-495)_ is running
-- _Red Hat JBoss AMQ_ broker is either running within the _fabric8_-managed cluster of _Red Hat JBoss Fuse 6.3.0 Rollup 18 (v6.3.0.redhat-495)_ or
+- A _fabric8_-managed cluster of _Red Hat JBoss Fuse 6.3.0 Rollup 19 (v6.3.0.redhat-515)_ is running
+- _Red Hat JBoss AMQ_ broker is either running within the _fabric8_-managed cluster of _Red Hat JBoss Fuse 6.3.0 Rollup 19 (v6.3.0.redhat-515)_ or
 as a standalone instance outside the _fabric8_ cluster
 - The project has been [built for a _Red Hat Fuse fabric8_-managed cluster deployment](../README.md#build-for-a-_fabric8_-managed-cluster-deployment)
 - All the generated _fabric8_ profiles have been imported (See instructions [here](../README.md#build-for-a-_fabric8_-managed-cluster-deployment))
