@@ -1,0 +1,370 @@
+{
+	"info": {
+		"_postman_id": "cde3fff7-3153-4c14-9c5c-587f3d252dcb",
+		"name": "JBoss Fuse 6.3 - IpService",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "check",
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {}
+			},
+			"request": {
+				"auth": {
+					"type": "oauth2",
+					"oauth2": [
+						{
+							"key": "accessTokenUrl",
+							"value": "https://sso.apps.cluster-wz2fb.wz2fb.sandbox649.opentlc.com/auth/realms/fuse-fabric-demo/protocol/openid-connect/token",
+							"type": "string"
+						},
+						{
+							"key": "clientSecret",
+							"value": "da00c771-a648-4ee4-9fff-780761bb4653",
+							"type": "string"
+						},
+						{
+							"key": "clientId",
+							"value": "postman_user_clientcredentials",
+							"type": "string"
+						},
+						{
+							"key": "tokenName",
+							"value": "postman_user_clientcredentials",
+							"type": "string"
+						},
+						{
+							"key": "grant_type",
+							"value": "client_credentials",
+							"type": "string"
+						},
+						{
+							"key": "authUrl",
+							"value": "https://sso.apps.cluster-ttb6w.ttb6w.sandbox817.opentlc.com/auth/realms/RH3scaleAdminPortal/protocol/openid-connect/auth",
+							"type": "string"
+						},
+						{
+							"key": "addTokenTo",
+							"value": "header",
+							"type": "string"
+						},
+						{
+							"key": "useBrowser",
+							"value": false,
+							"type": "boolean"
+						},
+						{
+							"key": "challengeAlgorithm",
+							"value": "S256",
+							"type": "string"
+						},
+						{
+							"key": "redirect_uri",
+							"value": "https://oauth.pstmn.io/v1/callback",
+							"type": "string"
+						},
+						{
+							"key": "client_authentication",
+							"value": "header",
+							"type": "string"
+						},
+						{
+							"key": "tokenType",
+							"value": "bearer",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8283/cxf/demorest/ipservice/check",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8283",
+					"path": [
+						"cxf",
+						"demorest",
+						"ipservice",
+						"check"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "geolocation",
+			"request": {
+				"auth": {
+					"type": "oauth2",
+					"oauth2": [
+						{
+							"key": "clientId",
+							"value": "postman_notuser_clientcredentials",
+							"type": "string"
+						},
+						{
+							"key": "tokenName",
+							"value": "postman_notuser_clientcredentials",
+							"type": "string"
+						},
+						{
+							"key": "accessTokenUrl",
+							"value": "https://sso.apps.cluster-wz2fb.wz2fb.sandbox649.opentlc.com/auth/realms/fuse-fabric-demo/protocol/openid-connect/token",
+							"type": "string"
+						},
+						{
+							"key": "clientSecret",
+							"value": "2eb4cfe4-da5a-4aba-aea0-a0e12539285d",
+							"type": "string"
+						},
+						{
+							"key": "grant_type",
+							"value": "client_credentials",
+							"type": "string"
+						},
+						{
+							"key": "authUrl",
+							"value": "https://sso.apps.cluster-ttb6w.ttb6w.sandbox817.opentlc.com/auth/realms/RH3scaleAdminPortal/protocol/openid-connect/auth",
+							"type": "string"
+						},
+						{
+							"key": "addTokenTo",
+							"value": "header",
+							"type": "string"
+						},
+						{
+							"key": "useBrowser",
+							"value": false,
+							"type": "boolean"
+						},
+						{
+							"key": "challengeAlgorithm",
+							"value": "S256",
+							"type": "string"
+						},
+						{
+							"key": "redirect_uri",
+							"value": "https://oauth.pstmn.io/v1/callback",
+							"type": "string"
+						},
+						{
+							"key": "client_authentication",
+							"value": "header",
+							"type": "string"
+						},
+						{
+							"key": "tokenType",
+							"value": "bearer",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8283/cxf/demorest/ipservice/geolocation?ip=redhat.com",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8283",
+					"path": [
+						"cxf",
+						"demorest",
+						"ipservice",
+						"geolocation"
+					],
+					"query": [
+						{
+							"key": "ip",
+							"value": "redhat.com"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "swagger.json",
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {}
+			},
+			"request": {
+				"auth": {
+					"type": "oauth2",
+					"oauth2": [
+						{
+							"key": "accessTokenUrl",
+							"value": "https://sso.apps.cluster-wz2fb.wz2fb.sandbox649.opentlc.com/auth/realms/fuse-fabric-demo/protocol/openid-connect/token",
+							"type": "string"
+						},
+						{
+							"key": "tokenName",
+							"value": "postman_user_clientcredentials",
+							"type": "string"
+						},
+						{
+							"key": "clientId",
+							"value": "postman_user_clientcredentials",
+							"type": "string"
+						},
+						{
+							"key": "clientSecret",
+							"value": "da00c771-a648-4ee4-9fff-780761bb4653",
+							"type": "string"
+						},
+						{
+							"key": "grant_type",
+							"value": "client_credentials",
+							"type": "string"
+						},
+						{
+							"key": "authUrl",
+							"value": "https://sso.apps.cluster-ttb6w.ttb6w.sandbox817.opentlc.com/auth/realms/RH3scaleAdminPortal/protocol/openid-connect/auth",
+							"type": "string"
+						},
+						{
+							"key": "addTokenTo",
+							"value": "header",
+							"type": "string"
+						},
+						{
+							"key": "useBrowser",
+							"value": false,
+							"type": "boolean"
+						},
+						{
+							"key": "challengeAlgorithm",
+							"value": "S256",
+							"type": "string"
+						},
+						{
+							"key": "redirect_uri",
+							"value": "https://oauth.pstmn.io/v1/callback",
+							"type": "string"
+						},
+						{
+							"key": "client_authentication",
+							"value": "header",
+							"type": "string"
+						},
+						{
+							"key": "tokenType",
+							"value": "bearer",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8283/cxf/demorest/swagger.json",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8283",
+					"path": [
+						"cxf",
+						"demorest",
+						"swagger.json"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "swagger.yaml",
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {}
+			},
+			"request": {
+				"auth": {
+					"type": "oauth2",
+					"oauth2": [
+						{
+							"key": "clientSecret",
+							"value": "da00c771-a648-4ee4-9fff-780761bb4653",
+							"type": "string"
+						},
+						{
+							"key": "accessTokenUrl",
+							"value": "https://sso.apps.cluster-wz2fb.wz2fb.sandbox649.opentlc.com/auth/realms/fuse-fabric-demo/protocol/openid-connect/token",
+							"type": "string"
+						},
+						{
+							"key": "tokenName",
+							"value": "postman_user_clientcredentials",
+							"type": "string"
+						},
+						{
+							"key": "clientId",
+							"value": "postman_user_clientcredentials",
+							"type": "string"
+						},
+						{
+							"key": "grant_type",
+							"value": "client_credentials",
+							"type": "string"
+						},
+						{
+							"key": "authUrl",
+							"value": "https://sso.apps.cluster-ttb6w.ttb6w.sandbox817.opentlc.com/auth/realms/RH3scaleAdminPortal/protocol/openid-connect/auth",
+							"type": "string"
+						},
+						{
+							"key": "addTokenTo",
+							"value": "header",
+							"type": "string"
+						},
+						{
+							"key": "useBrowser",
+							"value": false,
+							"type": "boolean"
+						},
+						{
+							"key": "challengeAlgorithm",
+							"value": "S256",
+							"type": "string"
+						},
+						{
+							"key": "redirect_uri",
+							"value": "https://oauth.pstmn.io/v1/callback",
+							"type": "string"
+						},
+						{
+							"key": "client_authentication",
+							"value": "header",
+							"type": "string"
+						},
+						{
+							"key": "tokenType",
+							"value": "bearer",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8283/cxf/demorest/swagger.yaml",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8283",
+					"path": [
+						"cxf",
+						"demorest",
+						"swagger.yaml"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
