@@ -123,8 +123,7 @@
 						<Bundle-SymbolicName>${project.artifactId}</Bundle-SymbolicName>
 						<Private-Package>org.jeannyil.fuse.demo.*</Private-Package>
 						<Import-Package>
-							com.fasterxml.jackson.*;version="[2,3)",
-							com.fasterxml.jackson.jaxrs.json;version="[2,3)",
+							com.fasterxml.jackson.*;version="[2.12,3)",
 							org.apache.cxf.bus;version="[2.7,3.2)",
 							org.apache.cxf.bus.spring;version="[2.7,3.2)",
 							org.apache.cxf.bus.resource;version="[2.7,3.2)",
